@@ -1,16 +1,33 @@
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import useContexts from "../hooks/useContexts";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import usePayment from "../hooks/usePayments";
 const RechargeComponnets = () => {
+  const { user } = useContexts();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-
+  const { payments } = usePayment();
+  console.log(payments);
   const onSubmit = async (data) => {
-    console.log(data);
-    reset();
+    const userName = user.displayName;
+    const userEmail = user.email;
+
+    console.log();
+    const { phoneNumber, transactionId, amount } = data;
+    const id = uuidv4();
+    const requests = await axios.post(
+      "http://localhost:3000/api/v1/createPayment",
+      { userName, userEmail, phoneNumber, transactionId, amount, id }
+    );
+
+    if (requests.data.success) {
+      reset();
+    }
   };
   return (
     <div>
@@ -21,31 +38,48 @@ const RechargeComponnets = () => {
         <div className="mb-4"></div>
         <div className="mb-4">
           <label
-            htmlFor="formNumber"
+            htmlFor="mobileNumber"
             className="block text-gray-700 text-sm font-bold mb-2 text-center"
           >
             নাম্বারঃ *
           </label>
           <input
-            id="formNumber"
+            id="mobileNumber"
             type="number"
-            {...register("formNumber", { required: true })}
+            {...register("mobileNumber", { required: true })}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
-          {errors.formNumber && (
+          {errors.mobileNumber && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
         <div className="mb-4">
           <label
-            htmlFor="signCopyDetails"
+            htmlFor="amount"
+            className="block text-gray-700 text-sm font-bold mb-2 text-center"
+          >
+            amount
+          </label>
+          <input
+            id="amount"
+            type="number"
+            {...register("amount", { required: true })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+          {errors.amount && (
+            <span className="text-red-500">This field is required</span>
+          )}
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="transactionId"
             className="block text-gray-700 text-sm font-bold mb-2 text-center"
           >
             Transition id
           </label>
           <textarea
-            id="signCopyDetails"
-            {...register("signCopyDetails")}
+            id="transactionId"
+            {...register("transactionId")}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>

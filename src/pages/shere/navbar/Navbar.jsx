@@ -1,26 +1,24 @@
-import { Link } from "react-router-dom";
-import logo from "../../../assets/images (5) (1).jpeg";
 import useContexts from "../../../hooks/useContexts";
+import useAprovedPayments from "../../../hooks/useAprovedPayment";
 const Navbar = () => {
   const { user, handleLogout } = useContexts();
+  const { payments } = useAprovedPayments();
+  if (!payments) {
+    return <h1>loading...</h1>;
+  }
+
   const handleLogouts = () => {
     handleLogout();
   };
   return (
     <div className="navbar ">
-      <div className=" flex-1">
-        <div className=" ">
-          <img src={logo} className="h-14 w-14 ml-24" alt="" />
-          <h1 className="text-2xl  font-bold ">
-            <span className="text-[#0066FF] text-center ml-14">Smart</span>{" "}
-            <span className="text-red-500 text-center "> Sheba</span>
-          </h1>
-        </div>
-      </div>
+      <div className=" flex-1"></div>
       <div className="flex-none gap-2">
         <div className="form-control">
           {user && (
-            <button className="btn bg-[#0066FF] text-white text-xl">100</button>
+            <button className="btn bg-[#0066FF] text-white text-xl">
+              {payments?.data?.amount}
+            </button>
           )}
         </div>
         {user && (
@@ -31,10 +29,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className=" w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+                <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
               </div>
             </div>
             <ul

@@ -20,6 +20,7 @@ import Logins from "../pages/LoginAndSinup/login/Logins";
 import PrivateRoutes from "./PrivateRoute/PrivateRoute";
 import RechargeComponnets from "../componnets/RechargeComponnets";
 import AdminHome from "../pages/Dashboard/admin/AdminHome";
+import AdminPaymentRequests from "../pages/Dashboard/admin/AdminPaymentRequests";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/home",
         element: <AdminHome />,
+      },
+      {
+        path: "/dashboard/payment-requests",
+        element: <AdminPaymentRequests />,
       },
     ],
   },
