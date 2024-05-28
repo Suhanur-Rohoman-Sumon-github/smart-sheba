@@ -4,7 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaSignInAlt, FaEyeSlash, FaEye } from "react-icons/fa";
 
 import useContexts from "../../../hooks/useContexts";
-
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Sinup = () => {
   // we used react hook form package. and handle form with that.
   const {
@@ -27,11 +29,24 @@ const Sinup = () => {
 
     // call the handleSinup function and create a user in the firebase
     handleSinup(email, password)
-      .then((result) => {
+      .then(async (result) => {
         // update the current user name and photo url
         updateUserProfile(name);
         console.log(result.user);
         navigate("/dashboard/create-nid");
+        const response = await axios.post(
+          `https://telent-finder.vercel.app/api/v1/set-payments?email=${result.user.email}`,
+          {
+            userEmail: result.user.email,
+            amount: 0,
+          }
+        );
+        console.log(response);
+        if (response.data.success) {
+          toast.success("Success Notification !", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
       })
       .catch((err) => console.error(err));
   };

@@ -38,7 +38,7 @@ const DashboardLaouts = () => {
         <div className="bg-white h-full flex flex-col z-10">
           <Link to={"/"}>
             <div className="md:p-4">
-              <img src={logo} className="h-24 w-72  " alt="" />
+              <img src={logo} className="h-24 md:w-72 w-64  " alt="" />
             </div>
           </Link>
           <div className="flex-grow overflow-y-auto">
