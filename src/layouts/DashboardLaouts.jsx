@@ -4,6 +4,7 @@ import { adminNavData, navDatas } from "../data/data";
 import useAdmin from "../hooks/useUser";
 import Navbar from "../pages/shere/navbar/Navbar";
 import { FaBars } from "react-icons/fa";
+
 const DashboardLaouts = () => {
   const { isAdmin } = useAdmin();
   console.log(isAdmin.isAdmin);
@@ -34,12 +35,14 @@ const DashboardLaouts = () => {
           className="drawer-overlay"
         ></label>
 
-        <div>
+        <div className="bg-white h-full flex flex-col z-10">
           <Link to={"/"}>
-            <ul className="menu p-4 bg-white  min-h-full text-base-content">
-              <div className="mb-4">
-                <img src={logo} className="h-24 w-72" alt="" />
-              </div>
+            <div className="md:p-4">
+              <img src={logo} className="h-24 w-72  " alt="" />
+            </div>
+          </Link>
+          <div className="flex-grow overflow-y-auto">
+            <ul className="menu  pt-0 text-base-content">
               {/* Sidebar content */}
               {isAdmin.isAdmin
                 ? adminNavData.map((nav, index) => (
@@ -91,7 +94,7 @@ const DashboardLaouts = () => {
                     </li>
                   ))}
             </ul>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
