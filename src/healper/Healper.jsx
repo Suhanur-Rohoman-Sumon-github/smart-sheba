@@ -9,3 +9,8 @@ export const singnCopy = async (data, identifier) => {
   });
   return response;
 };
+
+// export const accountBalance = () => {
+//   const accountBalance = payments.data.amount;
+//   return accountBalance;
+// };

@@ -1,8 +1,12 @@
 import useContexts from "../../../hooks/useContexts";
 import useAprovedPayments from "../../../hooks/useAprovedPayment";
+import { useEffect } from "react";
 const Navbar = () => {
   const { user, handleLogout } = useContexts();
-  const { payments } = useAprovedPayments();
+  const { payments, refetch } = useAprovedPayments();
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   if (!payments) {
     return <h1>loading...</h1>;
   }

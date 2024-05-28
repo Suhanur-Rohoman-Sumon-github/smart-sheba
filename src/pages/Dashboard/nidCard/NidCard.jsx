@@ -4,21 +4,34 @@ import Charge from "../../../componnets/Charge";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { singnCopy } from "../../../healper/Healper";
+import axios from "axios";
+import useContexts from "../../../hooks/useContexts";
+import useAprovedPayments from "../../../hooks/useAprovedPayment";
 
 const NidCard = () => {
+  const { user } = useContexts();
+  const { refetch } = useAprovedPayments();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-
+  const curretCharge = 60000000;
   const onSubmit = async (data) => {
     const identifier = "nid";
     const datas = await singnCopy(data, identifier);
     console.log(datas.data.success);
     if (datas.data.success) {
       toast.success("nid added wait for admin response");
+      const response = axios.post(
+        `http://localhost:3000/api/v1/update-payments?email=${user?.email}`,
+        {
+          amount: curretCharge,
+        }
+      );
+      console.log(response);
+      refetch;
       reset();
     }
   };
@@ -26,7 +39,7 @@ const NidCard = () => {
     <div>
       <Marque />
       <ComponnetsName title={"এনআইডি কার্ড অর্ডার করুন।"} />
-      <Charge title={"এনআইডি কার্ডের জন্য 90 টাকা কাটা হবে।"} />
+      <Charge title={`এনআইডি কার্ডের জন্য ${curretCharge} টাকা কাটা হবে।`} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className=" w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"

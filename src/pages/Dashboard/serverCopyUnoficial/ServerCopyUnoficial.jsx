@@ -1,23 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Marque from "../../../componnets/Marque";
 import ComponnetsName from "../../../componnets/ComponnetsName";
 import Charge from "../../../componnets/Charge";
+import axios from "axios";
+import useAprovedPayments from "../../../hooks/useAprovedPayment";
 
 const ServerCopyUnoficial = () => {
+  const { refetch, payments } = useAprovedPayments();
+  const [error, setError] = useState("");
+
+  console.log(error);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data, null, 2));
+  const currentCharge = 10;
+  const onSubmit = async (data) => {
+    if (payments?.data?.amount < currentCharge) {
+      setError("আপনার একাউন্টে পর্যাপ্ত টাকা নেই । দয়াকরে রিচার্জ করুন");
+      return;
+    }
+    const { nidNo, dob } = data;
+    // const response = await axios.get(
+    //   `https://api.foxithub.com/unofficial/apiown.php?key=signCopy&nid=${nidNo}&dob=${dob}`
+    // );
+    // console.log(response);
+    refetch();
   };
   return (
     <div>
       <Marque />
-      <ComponnetsName title={"Unofficial Server Copy"} />
+      <ComponnetsName title={" Server Copy"} />
 
       <form
         className=" w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -28,7 +43,7 @@ const ServerCopyUnoficial = () => {
             className="block text-gray-700 text-sm font-bold mb-2 text-center"
             htmlFor="nidNo"
           >
-            NID No.
+            NID NUMBER (10/17 DIGIT)
           </label>
           <input
             id="nidNo"
@@ -45,19 +60,21 @@ const ServerCopyUnoficial = () => {
             className="block text-gray-700 text-sm font-bold mb-2 text-center"
             htmlFor="dob"
           >
-            DOB
+            DATE OF BIRTH (YY-MM-DD)
           </label>
           <input
             id="dob"
-            type="date"
+            type="text"
             {...register("dob", { required: true })}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Example: 1990-11-30"
           />
           {errors.dob && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
-        <Charge title={"আপনার একাউন্ট থেকে 10 টাকা কাটা হবে।"} />
+        <Charge title={`আপনার একাউন্ট থেকে ${currentCharge} টাকা কাটা হবে।`} />
+        <p className="text-red-500">{error}</p>
         <div className="flex items-center justify-center">
           <button
             type="submit"

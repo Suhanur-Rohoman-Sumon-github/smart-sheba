@@ -28,11 +28,7 @@ export const navDatas = [
     path: "/dashboard/sign-copy",
     element: "সাইন কপি",
   },
-  {
-    icon: <LuServerCog />,
-    path: "/dashboard/server-copy",
-    element: "সার্ভার কপি",
-  },
+
   {
     icon: <FaRegIdCard />,
     path: "/dashboard/nid-card",
@@ -41,7 +37,7 @@ export const navDatas = [
   {
     icon: <VscServerProcess />,
     path: "/dashboard/server-copy-unofficial",
-    element: "সার্ভার কপি আনঅফিসিয়াল",
+    element: "সার্ভার কপি ",
   },
   {
     icon: <FaFingerprint />,
