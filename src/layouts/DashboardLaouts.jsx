@@ -35,7 +35,7 @@ const DashboardLaouts = () => {
           className="drawer-overlay"
         ></label>
 
-        <div className="bg-white h-full flex flex-col z-10">
+        <div className="bg-slate-50 h-full flex flex-col z-10">
           <Link to={"/"}>
             <div className="md:p-4">
               <img src={logo} className="h-24 md:w-72 w-64  " alt="" />
