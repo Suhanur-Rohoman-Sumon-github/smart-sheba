@@ -11,7 +11,7 @@ const AdminPaymentRequests = () => {
 
   const handlePaymentApproved = async (data) => {
     const response = await axios.post(
-      `http://localhost:3000/api/v1/set-payments?email=${user.email}`,
+      `https://telent-finder.vercel.app/api/v1/set-payments?email=${user.email}`,
       {
         userEmail: data.userEmail,
         amount: data.amount,
@@ -20,7 +20,7 @@ const AdminPaymentRequests = () => {
     console.log(response.data);
     if (response.data.success === true) {
       const response = await axios.delete(
-        `http://localhost:3000/api/v1/delete-payments?id=${data.id}`
+        `https://telent-finder.vercel.app/api/v1/delete-payments?id=${data.id}`
       );
       refetch();
       console.log(response);

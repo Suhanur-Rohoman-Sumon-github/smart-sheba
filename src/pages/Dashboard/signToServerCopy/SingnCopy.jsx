@@ -34,7 +34,7 @@ const SingnCopy = () => {
     if (datas.data.success) {
       toast.success("nid added wait for admin response");
       const response = await axios.patch(
-        `http://localhost:3000/api/v1/update-payments?email=${user?.email}`,
+        `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
         {
           amount: currentCharge,
         }

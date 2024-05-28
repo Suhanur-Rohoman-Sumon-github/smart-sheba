@@ -21,7 +21,7 @@ const RechargeComponnets = () => {
     const { phoneNumber, transactionId, amount } = data;
     const id = uuidv4();
     const requests = await axios.post(
-      "http://localhost:3000/api/v1/createPayment",
+      "https://telent-finder.vercel.app/api/v1/createPayment",
       { userName, userEmail, phoneNumber, transactionId, amount, id }
     );
 

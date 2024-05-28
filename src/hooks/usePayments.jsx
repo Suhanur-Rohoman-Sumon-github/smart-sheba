@@ -5,7 +5,9 @@ const usePayment = () => {
   const { data: payments = false, refetch } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/api/v1/payments`);
+      const res = await axios.get(
+        `https://telent-finder.vercel.app/api/v1/payments`
+      );
       return res.data;
     },
   });
