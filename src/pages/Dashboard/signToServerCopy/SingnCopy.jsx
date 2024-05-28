@@ -39,8 +39,10 @@ const SingnCopy = () => {
           amount: currentCharge,
         }
       );
-      console.log(response);
-
+      console.log();
+      if (response.data.success) {
+        toast.success("sucsses please wait for admin");
+      }
       refetch;
       reset();
     }
