@@ -1,25 +1,66 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import Marque from "../../../componnets/Marque";
 import ComponnetsName from "../../../componnets/ComponnetsName";
 import Charge from "../../../componnets/Charge";
+import useContexts from "../../../hooks/useContexts";
+import { useState } from "react";
+import useAprovedPayments from "../../../hooks/useAprovedPayment";
+import { singnCopy } from "../../../healper/Healper";
+import toast from "react-hot-toast";
+import axios from "axios";
+import useAllBioMatrics from "../../../hooks/useAllBIoMatrics";
+import { FaCircleArrowDown } from "react-icons/fa6";
 
 const Bayometric = () => {
+  const [disable, setDisable] = useState(false);
+  const { payments } = useAprovedPayments();
+  const { biometric, refetch } = useAllBioMatrics();
+  const [error, setError] = useState("");
+  const { user } = useContexts();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
+  const currentCharge = 150;
+  const onSubmit = async (data) => {
+    const identifier = "biometric";
+    const { formNumber, selectType, signCopyDetails } = data;
+    const sendData = {
+      formNumber,
+      selectType,
+      signCopyDetails,
+      userEmail: user?.email,
+    };
+    if (payments?.data?.amount < currentCharge) {
+      setError("আপনার একাউন্টে পর্যাপ্ত টাকা নেই । দয়াকরে রিচার্জ করুন");
+      return;
+    }
+    const datas = await singnCopy(sendData, identifier);
 
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data, null, 2));
+    if (datas.data.success) {
+      toast.success("nid added wait for admin response");
+      const response = await axios.patch(
+        `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
+        {
+          amount: currentCharge,
+        }
+      );
+      console.log();
+      if (response.data.success) {
+        refetch();
+        reset();
+        toast.success("success please wait for admin");
+      }
+    }
   };
   return (
     <div>
       <Marque />
       <ComponnetsName title={"বায়োমেট্রিক অর্ডার করুন।"} />
-      <Charge title={"সাইন কপির জন্য 250 টাকা কাটা হবে।"} />
-      <Charge title={"সাইন কপির জন্য 250 টাকা কাটা হবে।"} />
+      <Charge title={`বায়োমেট্রিক এর জন্য ${currentCharge} টাকা কাটা হবে ।`} />
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         className=" w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -47,7 +88,7 @@ const Bayometric = () => {
             htmlFor="formNumber"
             className="block text-gray-700 text-sm font-bold mb-2 text-center"
           >
-            রবি/এয়ারটেল নাম্বার *
+            বায়োমেট্রিক নাম্বার লিখুন *
           </label>
           <input
             id="formNumber"
@@ -72,6 +113,7 @@ const Bayometric = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
+        <p className="text-red-500">{error}</p>
         <div className="flex items-center justify-center">
           <button
             type="submit"
@@ -81,6 +123,39 @@ const Bayometric = () => {
           </button>
         </div>
       </form>
+      <div>
+        <div className="overflow-x-auto">
+          <table className="table ">
+            {/* head */}
+            <thead>
+              <tr className="text-xl text-[#0b3558] ">
+                <th>No</th>
+                <th>State</th>
+                <th>Issue For</th>
+                <th>Phone Number</th>
+              </tr>
+            </thead>
+            <tbody className="">
+              {biometric?.data?.map((sign, index) => (
+                <tr className="text-[#0066FF]" key={payments._id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    {sign.state === "pending" ? (
+                      "pending"
+                    ) : (
+                      <button className={"flex items-center   btn-primary"}>
+                        <FaCircleArrowDown />
+                      </button>
+                    )}
+                  </td>
+                  <td>{sign.selectType}</td>
+                  <td>{sign.formNumber}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

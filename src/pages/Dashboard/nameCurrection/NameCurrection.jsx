@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Marque from "../../../componnets/Marque";
 import ComponnetsName from "../../../componnets/ComponnetsName";
 import Charge from "../../../componnets/Charge";
 
 const NameCurrection = () => {
+  const [disable, setDisable] = useState(true);
   const {
     register,
     handleSubmit,
@@ -109,10 +110,14 @@ const NameCurrection = () => {
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            disabled={disable}
           >
             Submit
           </button>
         </div>
+        <p className="text-red-500">{`${
+          disable ? "New Order Currently Off By Admin" : ""
+        }`}</p>
       </form>
     </div>
   );

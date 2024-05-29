@@ -8,14 +8,16 @@ import axios from "axios";
 import useContexts from "../../../hooks/useContexts";
 import useAprovedPayments from "../../../hooks/useAprovedPayment";
 import { useState } from "react";
-
+import useAllSinCopy from "../../../hooks/useALlSinCoppy";
+import { FaCircleArrowDown } from "react-icons/fa6";
 const SingnCopy = () => {
-  const [disable, setDisable] = useState(true);
-  const { refetch, payments } = useAprovedPayments();
+  const [disable] = useState(false);
+  const { payments } = useAprovedPayments();
   const [error, setError] = useState("");
-  console.log(error);
 
   const { user } = useContexts();
+  const { sinCopy, refetch } = useAllSinCopy();
+
   const {
     register,
     handleSubmit,
@@ -25,12 +27,19 @@ const SingnCopy = () => {
   const currentCharge = 100;
   const onSubmit = async (data) => {
     const identifier = "sign";
-    const datas = await singnCopy(data, identifier);
-
+    const { formNumber, selectType, signCopyDetails } = data;
+    const sendData = {
+      formNumber,
+      selectType,
+      signCopyDetails,
+      userEmail: user?.email,
+    };
     if (payments?.data?.amount < currentCharge) {
       setError("আপনার একাউন্টে পর্যাপ্ত টাকা নেই । দয়াকরে রিচার্জ করুন");
       return;
     }
+    const datas = await singnCopy(sendData, identifier);
+
     if (datas.data.success) {
       toast.success("nid added wait for admin response");
       const response = await axios.patch(
@@ -41,17 +50,17 @@ const SingnCopy = () => {
       );
       console.log();
       if (response.data.success) {
-        toast.success("sucsses please wait for admin");
+        refetch();
+        reset();
+        toast.success("success please wait for admin");
       }
-      refetch;
-      reset();
     }
   };
   return (
     <div>
       <Marque />
       <ComponnetsName title={"সাইন কপি অর্ডার করুন।"} />
-      <Charge title={"সাইন কপির জন্য 60 টাকা কাটা হবে।"} />
+      <Charge title={`সাইন কপির জন্য ${currentCharge} টাকা কাটা হবে।`} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className=" w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -97,7 +106,7 @@ const SingnCopy = () => {
             htmlFor="signCopyDetails"
             className="block text-gray-700 text-sm font-bold mb-2 text-center"
           >
-            সাইন কপি সম্পর্কে বিস্তারিত লিখুনঃ(যদি কিছু বলার থাকে)
+            NAME/DOB
           </label>
           <textarea
             id="signCopyDetails"
@@ -119,6 +128,39 @@ const SingnCopy = () => {
           disable ? "New Order Currently Off By Admin" : ""
         }`}</p>
       </form>
+      <div>
+        <div className="overflow-x-auto">
+          <table className="table ">
+            {/* head */}
+            <thead>
+              <tr className="text-xl text-[#0b3558] ">
+                <th>No</th>
+                <th>State</th>
+                <th>Issue For</th>
+                <th>Issue Number</th>
+              </tr>
+            </thead>
+            <tbody className="">
+              {sinCopy?.data?.map((sign, index) => (
+                <tr className="text-[#0066FF]" key={payments._id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    {sign.state === "pending" ? (
+                      "pending"
+                    ) : (
+                      <button className={"flex items-center   btn-primary"}>
+                        <FaCircleArrowDown />
+                      </button>
+                    )}
+                  </td>
+                  <td>{sign.selectType}</td>
+                  <td>{sign.formNumber}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

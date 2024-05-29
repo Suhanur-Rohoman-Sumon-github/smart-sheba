@@ -137,7 +137,6 @@ const Sinup = () => {
                     required: true,
                     minLength: 6,
                     maxLength: 20,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                   })}
                   placeholder="password"
                   className="input input-bordered  w-full"
@@ -164,12 +163,7 @@ const Sinup = () => {
                 Password is smaller then 20 charectar
               </p>
             )}
-            {errors.password?.type === "pattern" && (
-              <p className="text-red-500">
-                password must be one uppercase one lower case one numbar and one
-                special cherecter
-              </p>
-            )}
+
             <div className="form-control">
               <label className="label">
                 <span className="">confirm Password</span>

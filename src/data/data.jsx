@@ -52,7 +52,7 @@ export const navDatas = [
   {
     icon: <FaUserEdit />,
     path: "/dashboard/name-correction",
-    element: "নিবন্ধন নাম কারেকশন",
+    element: "নিবন্ধন নাম কারেকশন ",
   },
 
   {
@@ -73,7 +73,7 @@ export const navDatas = [
   {
     icon: <FaSearchLocation />,
     path: "/dashboard/name-address",
-    element: "নাম ঠিকনা",
+    element: "নাম ঠিকনা (হারানো আইডি)",
   },
   {
     icon: <FaFileAlt />,
