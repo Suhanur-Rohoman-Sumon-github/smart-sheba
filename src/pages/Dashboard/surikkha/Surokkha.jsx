@@ -1,9 +1,8 @@
 import { useState } from "react";
-
-import { useForm } from "react-hook-form";
 import Charge from "../../../componnets/Charge";
+import { useForm } from "react-hook-form";
 
-const NameAndAddress = () => {
+const Surokkha = () => {
   const currentCharge = 200;
   const {
     register,
@@ -18,22 +17,44 @@ const NameAndAddress = () => {
   };
 
   const [placeholder, setPlaceholder] = useState(`
-    নিজ নাম-
-    পিতার নাম-
-    মাতার নাম-
-    স্বামী/স্ত্রী নাম-
-    জন্ম সনদ যদি থাকে-
-    বিভাগ-
-    জেলা-
-    উপজেলা-
-    ইউনিয়ন/পৌরসভা/সিটি করপোরেশন-
-    ওয়ার্ড নং-
-    ডাকঘর-
-    গ্রাম-
-    পিতার এনআইডি নং যদি থাকে-
-    মাতার এনআইডি নং যদি থাকে-
-    সাথে ভোটার হওয়া একজনের এনআইডি-
-  `);
+    নাম বাংলাঃ
+    Name English:
+    বাবা-মায়ের কততম সন্তানঃ
+    লিঙ্গঃ 
+    মোবাইলঃ 
+    
+    Date of birth:
+    
+    বিভাগঃ 
+    জেলাঃ 
+    উপজেলাঃ  
+    পৌরসভাঃ 
+    ওয়ার্ড নংঃ
+    
+    ডাকঘরঃ
+    Post office :
+    
+    গ্রামঃ
+    Village :
+    
+    
+    পিতার নামঃ
+    Father's name:
+    NID Number:
+    Birth Certified:
+    
+    
+    মাতার নামঃ
+    Mother's Name : 
+    NID Number:
+    Birth Certified: 
+    
+    
+    জন্ম স্থান:
+    স্থায়ী ঠিকানা:
+    
+    আবেদনকারীর whatsapp নাম্বার:
+    `);
 
   const [userText, setUserText] = useState("");
 
@@ -47,7 +68,6 @@ const NameAndAddress = () => {
   const handleTextareaChange = (e) => {
     setUserText(e.target.value);
   };
-
   return (
     <div>
       <Charge title={`আইডি কার্ড এর জন্য ${currentCharge} টাকা কাটা হবে ।`} />
@@ -105,4 +125,4 @@ const NameAndAddress = () => {
   );
 };
 
-export default NameAndAddress;
+export default Surokkha;

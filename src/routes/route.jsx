@@ -21,6 +21,8 @@ import PrivateRoutes from "./PrivateRoute/PrivateRoute";
 import RechargeComponnets from "../componnets/RechargeComponnets";
 import AdminHome from "../pages/Dashboard/admin/AdminHome";
 import AdminPaymentRequests from "../pages/Dashboard/admin/AdminPaymentRequests";
+import Tika from "../pages/Dashboard/Tika/Tika";
+import Surokkha from "../pages/Dashboard/surikkha/Surokkha";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +100,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/payment-requests",
         element: <AdminPaymentRequests />,
+      },
+      {
+        path: "/dashboard/tika",
+        element: <Tika />,
+      },
+      {
+        path: "/dashboard/nibondhon",
+        element: <Surokkha />,
       },
     ],
   },

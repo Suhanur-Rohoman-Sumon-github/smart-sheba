@@ -8,7 +8,7 @@ const useAllSinCopy = () => {
     queryKey: ["sinCopy"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/api/v1/get-all-sign-copy?email=${user?.email}`
+        `https://telent-finder.vercel.app/api/v1/get-all-sign-copy?email=${user?.email}`
       );
       return res.data;
     },

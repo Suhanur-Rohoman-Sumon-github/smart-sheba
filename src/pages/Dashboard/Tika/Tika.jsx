@@ -1,9 +1,8 @@
 import { useState } from "react";
-
-import { useForm } from "react-hook-form";
 import Charge from "../../../componnets/Charge";
+import { useForm } from "react-hook-form";
 
-const NameAndAddress = () => {
+const Tika = () => {
   const currentCharge = 200;
   const {
     register,
@@ -18,22 +17,10 @@ const NameAndAddress = () => {
   };
 
   const [placeholder, setPlaceholder] = useState(`
-    নিজ নাম-
-    পিতার নাম-
-    মাতার নাম-
-    স্বামী/স্ত্রী নাম-
-    জন্ম সনদ যদি থাকে-
-    বিভাগ-
-    জেলা-
-    উপজেলা-
-    ইউনিয়ন/পৌরসভা/সিটি করপোরেশন-
-    ওয়ার্ড নং-
-    ডাকঘর-
-    গ্রাম-
-    পিতার এনআইডি নং যদি থাকে-
-    মাতার এনআইডি নং যদি থাকে-
-    সাথে ভোটার হওয়া একজনের এনআইডি-
-  `);
+  পাসপোর্ট নাম্বার:
+  (OTP) ফোন নাম্বার:
+  পাসপোর্ট এর ছবি WhatsApp এ দিন
+    `);
 
   const [userText, setUserText] = useState("");
 
@@ -47,7 +34,6 @@ const NameAndAddress = () => {
   const handleTextareaChange = (e) => {
     setUserText(e.target.value);
   };
-
   return (
     <div>
       <Charge title={`আইডি কার্ড এর জন্য ${currentCharge} টাকা কাটা হবে ।`} />
@@ -105,4 +91,4 @@ const NameAndAddress = () => {
   );
 };
 
-export default NameAndAddress;
+export default Tika;

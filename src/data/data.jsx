@@ -1,12 +1,10 @@
 import { FaIdCard } from "react-icons/fa";
 import { FaFileSignature } from "react-icons/fa";
-import { LuServerCog } from "react-icons/lu";
 import { FaRegIdCard } from "react-icons/fa";
 import { VscServerProcess } from "react-icons/vsc";
 import { FaFingerprint } from "react-icons/fa";
 import { IoIosCall } from "react-icons/io";
 import { FaUserEdit } from "react-icons/fa";
-import { RiLockPasswordFill } from "react-icons/ri";
 import { FaSearchLocation } from "react-icons/fa";
 import { FaFileAlt } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
@@ -15,7 +13,9 @@ import { TbPasswordMobilePhone } from "react-icons/tb";
 import bkash from "../assets/b.svg";
 import nagod from "../assets/n.svg";
 import { FaHome } from "react-icons/fa";
+import { GiLoveInjection } from "react-icons/gi";
 import { FaCodePullRequest } from "react-icons/fa6";
+import { GrCertificate } from "react-icons/gr";
 import { FaCcMastercard } from "react-icons/fa";
 export const navDatas = [
   {
@@ -48,6 +48,16 @@ export const navDatas = [
     icon: <IoIosCall />,
     path: "/dashboard/call-list",
     element: "কল লিস্ট অল সিম",
+  },
+  {
+    icon: <GiLoveInjection />,
+    path: "/dashboard/tika",
+    element: "সুরক্ষা টিকা",
+  },
+  {
+    icon: <GrCertificate />,
+    path: "/dashboard/nibondhon",
+    element: "জন্ম নিবন্ধন (Online)",
   },
   {
     icon: <FaUserEdit />,
