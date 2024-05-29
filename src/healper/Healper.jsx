@@ -1,4 +1,5 @@
 import axios from "axios";
+import { FaCircleArrowDown } from "react-icons/fa6";
 
 export const base_url = "https://telent-finder.vercel.app/api/v1";
 export const singnCopy = async (data, identifier) => {
@@ -15,8 +16,3 @@ export const singnCopy = async (data, identifier) => {
   });
   return response;
 };
-
-// export const accountBalance = () => {
-//   const accountBalance = payments.data.amount;
-//   return accountBalance;
-// };

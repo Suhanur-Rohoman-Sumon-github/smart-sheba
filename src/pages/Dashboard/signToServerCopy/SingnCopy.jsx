@@ -9,6 +9,7 @@ import useContexts from "../../../hooks/useContexts";
 import useAprovedPayments from "../../../hooks/useAprovedPayment";
 import { useState } from "react";
 import useAllSinCopy from "../../../hooks/useALlSinCoppy";
+import { saveAs } from "file-saver";
 import { FaCircleArrowDown } from "react-icons/fa6";
 const SingnCopy = () => {
   const [disable] = useState(false);
@@ -18,6 +19,17 @@ const SingnCopy = () => {
   const { user } = useContexts();
   const { sinCopy, refetch } = useAllSinCopy();
 
+  const handleDownload = async (fileUrl) => {
+    try {
+      const response = await axios.get(fileUrl, {
+        responseType: "blob", // Important to get the response as a Blob
+      });
+      const fileBlob = new Blob([response.data], { type: "application/pdf" });
+      saveAs(fileBlob, "suhanur-rohoman-sumon-resume.pdf");
+    } catch (error) {
+      console.error("Error downloading the file:", error);
+    }
+  };
   const {
     register,
     handleSubmit,
@@ -148,7 +160,10 @@ const SingnCopy = () => {
                     {sign.state === "pending" ? (
                       "pending"
                     ) : (
-                      <button className={"flex items-center   btn-primary"}>
+                      <button
+                        onClick={() => handleDownload(sign.fileName)}
+                        className={"flex items-center   btn-primary"}
+                      >
                         <FaCircleArrowDown />
                       </button>
                     )}

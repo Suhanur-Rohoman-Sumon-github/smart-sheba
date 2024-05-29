@@ -23,6 +23,7 @@ import AdminHome from "../pages/Dashboard/admin/AdminHome";
 import AdminPaymentRequests from "../pages/Dashboard/admin/AdminPaymentRequests";
 import Tika from "../pages/Dashboard/Tika/Tika";
 import Surokkha from "../pages/Dashboard/surikkha/Surokkha";
+import AdminRequests from "../pages/Dashboard/admin/AdminRequests";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/nibondhon",
         element: <Surokkha />,
+      },
+      {
+        path: "/dashboard/requests",
+        element: <AdminRequests />,
       },
     ],
   },
