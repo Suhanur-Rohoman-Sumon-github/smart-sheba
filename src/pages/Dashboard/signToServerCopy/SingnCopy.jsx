@@ -18,7 +18,7 @@ const SingnCopy = () => {
 
   const { user } = useContexts();
   const { sinCopy, refetch } = useAllSinCopy();
-
+  console.log(sinCopy);
   const handleDownload = async (fileUrl) => {
     try {
       const response = await axios.get(fileUrl, {
@@ -66,6 +66,20 @@ const SingnCopy = () => {
         reset();
         toast.success("success please wait for admin");
       }
+    }
+  };
+  const downloadPdf = async (pdfName, id) => {
+    try {
+      const response = await axios.get(
+        `https://telent-finder.vercel.app/api/v1/pdfs/${pdfName}?id=${id}`,
+        {
+          responseType: "blob",
+        }
+      );
+
+      saveAs(response.data, pdfName);
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
     }
   };
   return (
@@ -161,7 +175,7 @@ const SingnCopy = () => {
                       "pending"
                     ) : (
                       <button
-                        onClick={() => handleDownload(sign.fileName)}
+                        onClick={() => downloadPdf(sign.fileName, sign._id)}
                         className={"flex items-center   btn-primary"}
                       >
                         <FaCircleArrowDown />

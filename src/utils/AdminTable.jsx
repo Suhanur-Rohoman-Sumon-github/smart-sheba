@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FaCircleArrowDown } from "react-icons/fa6";
 
 const AdminTable = ({ data, title }) => {
@@ -9,7 +10,7 @@ const AdminTable = ({ data, title }) => {
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-  const handleUpload = async () => {
+  const handleUpload = async (id) => {
     if (!selectedFile) {
       return;
     }
@@ -19,7 +20,7 @@ const AdminTable = ({ data, title }) => {
       formData.append("pdf", selectedFile);
 
       const response = await axios.post(
-        "https://telent-finder.vercel.app/api/v1/upload",
+        `https://telent-finder.vercel.app/api/v1/upload/${id}`,
         formData,
         {
           headers: {
@@ -27,6 +28,10 @@ const AdminTable = ({ data, title }) => {
           },
         }
       );
+
+      if (response.data.success) {
+        toast.success("file uploaded successfully");
+      }
 
       // Optionally, display a success message to the user
     } catch (error) {
@@ -63,8 +68,11 @@ const AdminTable = ({ data, title }) => {
                     type="file"
                     onChange={handleFileChange}
                   />
-                  <button className="btn-primary ml-4" onClick={handleUpload}>
-                    Upload PDF
+                  <button
+                    className="btn-primary ml-4 mt-4 md:mt-0"
+                    onClick={() => handleUpload(sign._id)}
+                  >
+                    Upload
                   </button>
                 </td>
               </tr>
