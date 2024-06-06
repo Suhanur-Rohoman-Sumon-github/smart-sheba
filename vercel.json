@@ -1,6 +1,6 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/" },
-    { "source": "/api/(.*)", "destination": "/api/proxy" }
+    { "source": "/api/(.*)", "destination": "./vite.config.js" }
   ]
 }
