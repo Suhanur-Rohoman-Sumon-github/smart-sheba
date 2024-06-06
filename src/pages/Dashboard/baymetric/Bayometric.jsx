@@ -27,7 +27,7 @@ const Bayometric = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const currentCharge = 150;
+  const currentCharge = 99;
 
   const onSubmit = async (data) => {
     const identifier = "biometric";

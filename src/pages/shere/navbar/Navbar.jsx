@@ -1,5 +1,6 @@
 import useContexts from "../../../hooks/useContexts";
 import useAprovedPayments from "../../../hooks/useAprovedPayment";
+import userImage from "../../../assets/eagle_914956-368-removebg-preview.png";
 import { useEffect } from "react";
 const Navbar = () => {
   const { user, handleLogout } = useContexts();
@@ -33,7 +34,10 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className=" w-10 rounded-full">
-                <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src={user.photoURL ? user.photoURL : userImage}
+                />
               </div>
             </div>
             <ul
