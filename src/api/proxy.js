@@ -1,16 +1,10 @@
-import axios from "axios";
+// api/proxy.js
+import { createProxyMiddleware } from "http-proxy-middleware";
 
-export default async function handler(req, res) {
-  const { nid, dob } = req.query;
-
-  try {
-    const response = await axios.get(
-      `https://api.foxithub.com/unofficial/apiown.php?key=signCopy&nid=${nid}&dob=${dob}`
-    );
-    res.status(200).json(response.data);
-  } catch (error) {
-    const status = error.response?.status || 500;
-    const message = error.response?.data?.message || error.message;
-    res.status(status).json({ message });
-  }
-}
+export default createProxyMiddleware({
+  target: "https://api.foxithub.com",
+  changeOrigin: true,
+  pathRewrite: {
+    "^/api": "", // remove /api prefix when forwarding to target
+  },
+});
