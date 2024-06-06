@@ -10,13 +10,17 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import useAllBioMatrics from "../../../hooks/useAllBIoMatrics";
 import { FaCircleArrowDown } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Bayometric = () => {
   const [disable, setDisable] = useState(false);
+  const [nidData, setNidData] = useState({});
+  console.log(nidData);
   const { payments } = useAprovedPayments();
   const { biometric, refetch } = useAllBioMatrics();
   const [error, setError] = useState("");
   const { user } = useContexts();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -24,37 +28,54 @@ const Bayometric = () => {
     reset,
   } = useForm();
   const currentCharge = 150;
+
   const onSubmit = async (data) => {
     const identifier = "biometric";
     const { formNumber, selectType, signCopyDetails } = data;
+    if (payments?.data?.amount < currentCharge) {
+      setError("আপনার একাউন্টে পর্যাপ্ত টাকা নেই । দয়াকরে রিচার্জ করুন");
+      return;
+    }
     const sendData = {
       formNumber,
       selectType,
       signCopyDetails,
       userEmail: user?.email,
     };
-    if (payments?.data?.amount < currentCharge) {
-      setError("আপনার একাউন্টে পর্যাপ্ত টাকা নেই । দয়াকরে রিচার্জ করুন");
-      return;
-    }
     const datas = await singnCopy(sendData, identifier);
 
-    if (datas.data.success) {
-      toast.success("nid added wait for admin response");
-      const response = await axios.patch(
-        `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
-        {
-          amount: currentCharge,
+    try {
+      if (datas.data.success) {
+        const response = await axios.get(
+          `/biometric-api/?key=axxdexeftyusbro&number=${formNumber}`
+        );
+        const { number, nid, dob, success } = response.data;
+
+        if (success) {
+          toast.success("nid added wait for admin response");
+          const updateResponse = await axios.patch(
+            `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
+            { amount: currentCharge }
+          );
+
+          if (updateResponse.data.success) {
+            refetch();
+            reset();
+            toast.success("success please wait for admin");
+            setNidData({ number, nid, dob });
+            singnCopy(identifier, formNumber, selectType, signCopyDetails);
+            navigate("/dashboard/biometrics-details", {
+              state: { data: response.data },
+            });
+          }
         }
-      );
-      console.log();
-      if (response.data.success) {
-        refetch();
-        reset();
-        toast.success("success please wait for admin");
       }
+    } catch (error) {
+      console.error("Error:", error);
+      setError("An error occurred while processing your request.");
     }
   };
+
   return (
     <div>
       <Marque />

@@ -10,6 +10,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
+      "/biometric-api": {
+        target: "https://api.bdts7.fun",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/(api|biometric-api)/, ""),
+      },
     },
   },
 });

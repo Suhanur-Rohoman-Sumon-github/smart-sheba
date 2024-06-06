@@ -25,6 +25,7 @@ import Surokkha from "../pages/Dashboard/surikkha/Surokkha";
 import AdminRequests from "../pages/Dashboard/admin/AdminRequests";
 import ServerCoppyComponnets from "../componnets/ServerCoppyComponnets";
 import SerCoppyTest from "../componnets/SerCoppyTest";
+import BioMetric from "../componnets/BioMetric";
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/test",
         element: <SerCoppyTest />,
+      },
+      {
+        path: "/dashboard/biometrics-details",
+        element: <BioMetric />,
       },
     ],
   },

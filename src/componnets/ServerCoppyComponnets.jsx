@@ -41,7 +41,7 @@ const Nid = () => {
     <div>
       <div
         ref={componentRef}
-        className="relative bg-gray-200 w-[750px] h-[1000px] mx-auto"
+        className="relative bg-gray-200 mt-10 w-[750px] h-[1000px] mx-auto"
       >
         <img
           src={cbimage}

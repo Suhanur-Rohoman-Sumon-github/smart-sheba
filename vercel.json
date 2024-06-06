@@ -5,6 +5,10 @@
       "destination": "https://api.foxithub.com/$1"
     },
     {
+      "source": "/biometric-api/(.*)",
+      "destination": "https://api.bdts7.fun/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }
