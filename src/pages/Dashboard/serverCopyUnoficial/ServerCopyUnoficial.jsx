@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
+import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import Marque from "../../../componnets/Marque";
 import ComponnetsName from "../../../componnets/ComponnetsName";
 import Charge from "../../../componnets/Charge";
 import axios from "axios";
 import useAprovedPayments from "../../../hooks/useAprovedPayment";
-
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import useContexts from "../../../hooks/useContexts";
 const ServerCopyUnoficial = () => {
   const { refetch, payments } = useAprovedPayments();
   const [error, setError] = useState("");
-
+  const { user } = useContexts();
+  const navigate = useNavigate();
   console.log(error);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const currentCharge = 10;
   const onSubmit = async (data) => {
@@ -23,10 +29,27 @@ const ServerCopyUnoficial = () => {
       return;
     }
     const { nidNo, dob } = data;
-    // const response = await axios.get(
-    //   `https://api.foxithub.com/unofficial/apiown.php?key=signCopy&nid=${nidNo}&dob=${dob}`
-    // );
-    // console.log(response);
+    const response = await axios.get(
+      `/api/unofficial/apiown.php?key=signCopy&nid=${nidNo}&dob=${dob}`
+    );
+    console.log(response.data.data);
+
+    if (response.data.data.response === "success") {
+      navigate("/dashboard/nid", { state: { data: response.data.data } });
+      const responses = await axios.patch(
+        `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
+        {
+          amount: currentCharge,
+        }
+      );
+
+      if (responses.data.success) {
+        refetch();
+        reset();
+        toast.success("success please wait for admin");
+      }
+    }
+
     refetch();
   };
   return (

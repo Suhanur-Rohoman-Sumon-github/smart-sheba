@@ -60,7 +60,7 @@ const SingnCopy = () => {
           amount: currentCharge,
         }
       );
-      console.log();
+
       if (response.data.success) {
         refetch();
         reset();

@@ -29,7 +29,7 @@ const DashboardLaouts = () => {
       />
       <div className="drawer-content flex flex-col">
         {/* Navbar with drawer toggle button */}
-        <div className="flex justify-between items-center p-4 lg:hidden">
+        <div className="flex justify-between items-center z-10 p-4 lg:hidden">
           <label
             htmlFor="my-drawer-2"
             className="btn btn-primary drawer-button"

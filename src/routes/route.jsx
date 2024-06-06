@@ -3,7 +3,6 @@ import DashboardLaouts from "../layouts/DashboardLaouts";
 import App from "../App";
 import CreateNid from "../pages/Dashboard/createNid/CreateNid";
 import SingnCopy from "../pages/Dashboard/signToServerCopy/SingnCopy";
-import ServerCopy from "../pages/Dashboard/serverCopy/ServerCopy";
 import NidCard from "../pages/Dashboard/nidCard/NidCard";
 import ServerCopyUnoficial from "../pages/Dashboard/serverCopyUnoficial/ServerCopyUnoficial";
 import Bayometric from "../pages/Dashboard/baymetric/Bayometric";
@@ -24,6 +23,8 @@ import AdminPaymentRequests from "../pages/Dashboard/admin/AdminPaymentRequests"
 import Tika from "../pages/Dashboard/Tika/Tika";
 import Surokkha from "../pages/Dashboard/surikkha/Surokkha";
 import AdminRequests from "../pages/Dashboard/admin/AdminRequests";
+import ServerCoppyComponnets from "../componnets/ServerCoppyComponnets";
+import SerCoppyTest from "../componnets/SerCoppyTest";
 
 const router = createBrowserRouter([
   {
@@ -42,10 +43,7 @@ const router = createBrowserRouter([
         path: "/dashboard/sign-copy",
         element: <SingnCopy />,
       },
-      {
-        path: "/dashboard/server-copy",
-        element: <ServerCopy />,
-      },
+
       {
         path: "/dashboard/nid-card",
         element: <NidCard />,
@@ -113,6 +111,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/requests",
         element: <AdminRequests />,
+      },
+      {
+        path: "/dashboard/nid",
+        element: <ServerCoppyComponnets />,
+      },
+      {
+        path: "/dashboard/test",
+        element: <SerCoppyTest />,
       },
     ],
   },
