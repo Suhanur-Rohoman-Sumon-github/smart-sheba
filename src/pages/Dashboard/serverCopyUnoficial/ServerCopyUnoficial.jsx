@@ -30,11 +30,11 @@ const ServerCopyUnoficial = () => {
     }
     const { nidNo, dob } = data;
     const response = await axios.get(
-      `/api/unofficial/apiown.php?key=signCopy&nid=${nidNo}&dob=${dob}`
+      `https://api.foxithub.com/unofficial/apidemo.php?key=demo&nid=1122334455&dob=2001-01-01`
     );
-    console.log(response.data.data);
+    console.log(response.data.data.status);
 
-    if (response.data.data.response === "success") {
+    if (response.data.data.status === "success") {
       navigate("/dashboard/nid", { state: { data: response.data.data } });
       const responses = await axios.patch(
         `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
