@@ -30,7 +30,7 @@ const ServerCopyUnoficial = () => {
     }
     const { nidNo, dob } = data;
     const response = await axios.get(
-      `https://api.foxithub.com/unofficial/apidemo.php?key=demo&nid=1122334455&dob=2001-01-01`
+      `/api/unofficial/apidemo.php?key=demo&nid=1122334455&dob=2001-01-01`
     );
     console.log(response.data.data.status);
 
