@@ -29,13 +29,13 @@ const ServerCopyUnoficial = () => {
       return;
     }
     const { nidNo, dob } = data;
-    const responses = await axios.get(
+    const response = await axios.get(
       `/api/unofficial/apiown.php?key=signCopy&nid=${nidNo}&dob=${dob}`
     );
-    console.log(responses.data.data);
+    console.log(response.data.data);
 
-    if (responses.data.data.response === "success") {
-      navigate("/dashboard/nid", { state: { data: responses.data.data } });
+    if (response.data.data.response === "success") {
+      navigate("/dashboard/nid", { state: { data: response.data.data } });
       const responses = await axios.patch(
         `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
         {
