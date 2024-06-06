@@ -1,6 +1,6 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/" },
-    { "source": "/api/(.*)", "destination": "./vite.config.js" }
+    { "source": "/api/(.*)", "destination": "https://api.foxithub.com/" }
   ]
 }

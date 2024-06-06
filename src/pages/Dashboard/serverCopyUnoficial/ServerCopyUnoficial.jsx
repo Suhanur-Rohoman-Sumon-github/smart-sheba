@@ -32,7 +32,7 @@ const ServerCopyUnoficial = () => {
     const response = await axios.get(
       `/api/unofficial/apidemo.php?key=demo&nid=1122334455&dob=2001-01-01`
     );
-    console.log(response.data.data.status);
+    console.log(response);
 
     if (response.data.data.status === "success") {
       navigate("/dashboard/nid", { state: { data: response.data.data } });
