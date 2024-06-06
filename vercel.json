@@ -2,8 +2,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://api.foxithub.com/"
+      "destination": "https://api.foxithub.com/$1"
     },
-    { "source": "/(.*)", "destination": "/" }
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
   ]
 }
