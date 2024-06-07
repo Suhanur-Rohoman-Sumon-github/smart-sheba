@@ -1,22 +1,21 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
-import jsPDF from "jspdf";
-import domtoimage from "dom-to-image";
-import cbimage from "../assets/Picsart_24-06-06_12-46-58-578.png";
+
+import cbimage from "../assets/last bg server copy.jpg";
+import axios from "axios";
 const Nid = () => {
+  const [imge, setImage] = useState();
+  console.log(imge);
   const location = useLocation();
-  const { data } = location.state || {};
-  console.log(data.data);
+  const { data, nidNo, serial } = location.state || {};
+  console.log(data.data, nidNo, serial);
+
   const componentRef = useRef();
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-
-  if (!data) {
-    return <div>No data found.</div>;
-  }
 
   const {
     name,
@@ -30,13 +29,35 @@ const Nid = () => {
     spouse,
     voterArea,
     pin,
-    nidMother,
+    religion,
     photo,
     permanentAddress,
     presentAddress,
     birthPlace,
   } = data.data;
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/api/qr/?data=${nameEn}+${nationalId}+${dateOfBirth}`,
+          {
+            responseType: "blob",
+          }
+        );
+        const imageBlob = response.data;
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        setImage(imageObjectURL);
+      } catch (error) {
+        console.error("Error fetching the image:", error);
+      }
+    };
+    if (data && data.data) {
+      fetchData();
+    }
+  }, [nameEn, nationalId, dateOfBirth, data]);
+  if (!data) {
+    return <div>No data found.</div>;
+  }
   return (
     <div>
       <div
@@ -48,138 +69,144 @@ const Nid = () => {
           className="absolute inset-0 w-full h-full object-cover"
           alt="Background"
         />
-        <div className="absolute left-[27%] top-[5%] text-[16px] text-yellow-400 font-bold">
+        <div className="absolute left-[27%] top-[9%] text-[16px] text-yellow-400 ">
           National Identity Registration Wing (NIDW)
         </div>
-        <div className="absolute left-[37%] top-[8%] text-pink-500 text-[14px] font-bold">
+        <div className="absolute left-[39%] font-bold top-[11.5%] text-pink-500 text-[14px] ">
           Select Your Search Category
         </div>
-        <div className="absolute left-[45%] top-[10.3%] text-green-500 font-bold text-[12px]">
+        <div className="absolute font-bold left-[45%] top-[13.5%] text-green-500  text-[12px]">
           Search By NID / Voter No.
         </div>
-        <div className="absolute left-[45%] top-[11.8%] text-blue-700 text-[12px]">
+        <div className="absolute font-bold left-[45%] top-[14.6%] text-blue-700 text-[12px]">
           Search By Form No.
         </div>
-        <div className="absolute left-[29%] top-[14.6%] text-red-500 text-[12px] font-bold">
+        <div className="absolute font-bold left-[29%] top-[17%] text-red-500 text-[12px] ">
           NID or Voter No*
         </div>
-        <div className="absolute left-[45%] top-[14.6%] text-gray-600 text-[12px]">
+        <div className="absolute left-[45%] top-[17%] text-gray-600 text-[12px]">
           NID
         </div>
-        <div className="absolute left-[62.9%] top-[14.6%] text-white text-[11px]">
+        <div className="absolute left-[60.9%] top-[17.4%] text-white text-[11px] ">
           Submit
         </div>
-        <div className="absolute left-[89%] top-[9%] text-white text-[11px]">
+        <div className="absolute left-[83%] top-[12%] text-white  text-[11.6px]">
           Home
         </div>
 
-        <div className="absolute left-[37%] top-[25.5%] text-[16px] font-bold text-black">
+        <div className="absolute left-[39%] top-[23.9%] font-bold text-[16px]  text-black">
           জাতীয় পরিচিতি তথ্য
         </div>
-        <div className="absolute left-[37%] top-[28.7%] text-[13px] text-black">
+        <div className="absolute left-[39%] top-[26.7%] text-[11px]  text-black">
           জাতীয় পরিচয় পত্র নম্বর
         </div>
-        <div className="absolute left-[56%] top-[28.7%] text-[14px] text-black">
+        <div className="absolute left-[56%] top-[26.7%] text-[13px] text-black">
           {nationalId}
         </div>
-        <div className="absolute left-[37%] top-[31.5%] text-sm text-black">
+        <div className="absolute left-[39%] top-[29%] text-[11px]  text-black">
           পিন নম্বর
         </div>
-        <div className="absolute left-[55%] top-[31.5%] text-sm text-black">
+        <div className="absolute left-[55%] top-[29%]  text-[11px]  text-black">
           {pin}
         </div>
-        <div className="absolute left-[37%] top-[34%] text-sm text-black">
+        <div className="absolute left-[39%] top-[31.5%] text-[11px]  text-black">
           ভোটার সিরিয়াল
         </div>
-        <div className="absolute left-[55%] top-[34.5%] text-sm text-black">
-          {nidMother}
+        <div className="absolute left-[55%] top-[31.5%] text-[11px]  text-black">
+          {nidNo}
         </div>
-        <div className="absolute left-[37%] top-[36.8%] text-sm text-black">
+        <div className="absolute left-[39%] top-[34%] text-[11px]  text-black">
           ভোটার এলাকা
         </div>
-        <div className="absolute left-[55%] top-[37.5%] text-sm text-black">
+        <div className="absolute left-[55%] top-[34%] text-[11px]  text-black">
           {voterArea}
         </div>
-        <div className="absolute left-[37%] top-[39.5%] text-sm text-black">
+        <div className="absolute left-[39%] top-[36.5%] text-[11px]  text-black">
           জন্মস্থান
         </div>
-        <div className="absolute left-[55%] top-[40.2%] text-sm text-black">
+        <div className="absolute left-[55%] top-[36.5%] text-[11px]  text-black">
           {birthPlace}
         </div>
-        <div className="absolute left-[37%] top-[42%] text-lg font-bold text-black">
+        <div className="absolute left-[39%] top-[38.5%] font-bold text-lg  text-black">
           ব্যক্তিগত তথ্য
         </div>
-        <div className="absolute left-[37%] top-[45.6%] text-sm text-black">
+        <div className="absolute left-[39%] top-[41.2%] text-[11px]  text-black">
           নাম (বাংলা)
         </div>
-        <div className="absolute left-[55%] top-[45.6%] text-sm font-bold text-black">
+        <div className="absolute left-[55%] top-[41.2%] text-[11px]   text-black">
           {name}
         </div>
-        <div className="absolute left-[37%] top-[48.5%] text-sm text-black">
+        <div className="absolute left-[39%] top-[44%] text-[11px]  text-black">
           নাম (ইংরেজি)
         </div>
-        <div className="absolute left-[55%] top-[48.5%] text-sm text-black">
+        <div className="absolute left-[55%] top-[44%] text-[11px]  text-black">
           {nameEn}
         </div>
-        <div className="absolute left-[37%] top-[51%] text-sm text-black">
+        <div className="absolute left-[39%] top-[46.5%] text-[11px]  text-black">
           জন্ম তারিখ
         </div>
-        <div className="absolute left-[55%] top-[51%] text-sm text-black">
+        <div className="absolute left-[55%] top-[46.5%] text-[11px]  text-black">
           {dateOfBirth}
         </div>
-        <div className="absolute left-[37%] top-[53.7%] text-sm text-black">
+        <div className="absolute left-[39%] top-[49%] text-[11px]  text-black">
           পিতার নাম
         </div>
-        <div className="absolute left-[55%] top-[53.7%] text-sm text-black">
+        <div className="absolute left-[55%] top-[49%] text-[11px]  text-black">
           {father}
         </div>
-        <div className="absolute left-[37%] top-[56.4%] text-sm text-black">
+        <div className="absolute left-[39%] top-[51%] text-[11px]  text-black">
           মাতার নাম
         </div>
-        <div className="absolute left-[55%] top-[56.4%] text-sm text-black">
+        <div className="absolute left-[55%] top-[51%] text-[11px]  text-black">
           {mother}
         </div>
-        <div className="absolute left-[37%] top-[59%] text-lg font-bold text-black">
+        <div className="absolute left-[39%] top-[53.4%] text-[11px]  text-black">
+          স্বামী/স্ত্রী
+        </div>
+        <div className="absolute left-[55%] top-[53.4%] text-[11px]  text-black">
+          {spouse ? spouse : ""}
+        </div>
+        <div className="absolute left-[39%] top-[55.5%] text-lg  text-black">
           অন্যান্য তথ্য
         </div>
-        <div className="absolute left-[37%] top-[63%] text-sm text-black">
+        <div className="absolute left-[39%] top-[59%] text-[11px]  text-black">
           লিঙ্গ
         </div>
-        <div className="absolute left-[55%] top-[63%] text-sm text-black">
+        <div className="absolute left-[55%] top-[59%] text-[11px]  text-black">
           {gender}
         </div>
-        <div className="absolute left-[37%] top-[65.5%] text-sm text-black">
+        <div className="absolute left-[39%] top-[61.5%] text-[11px]  text-black">
           রক্তের গ্রুপ
         </div>
-        <div className="absolute left-[55%] top-[65.5%] text-sm text-black">
+        <div className="absolute left-[55%] top-[61.5%] text-[11px]  text-black">
           {bloodGroup}
         </div>
-        <div className="absolute left-[37%] top-[68.5%] text-sm text-black">
+        <div className="absolute left-[39%] top-[64%] text-[11px]  text-black">
           সিরিয়াল নং
         </div>
-        <div className="absolute left-[55%] top-[68.5%] text-sm text-black">
-          {spouse ? "Married" : "Single"}
+        <div className="absolute left-[55%] top-[64%] text-[11px]  text-black">
+          {serial}
         </div>
-        <div className="absolute left-[37%] top-[71.5%] text-sm text-black">
+        <div className="absolute left-[39%] top-[66.5%] text-[11px]  text-black">
           ধর্ম
         </div>
-        <div className="absolute left-[55%] top-[71.5%] text-sm text-black">
-          {spouse ? "Married" : "Single"}
+        <div className="absolute left-[55%] top-[66.5%] text-[11px]  text-black">
+          {religion ? religion : ""}
         </div>
-        <div className="absolute left-[37%] top-[83%] text-lg font-bold text-black">
-          স্থায়ী ঠিকানা
-        </div>
-        <div className="absolute left-[37%] top-[87%] text-sm text-black">
-          {permanentAddress}
-        </div>
-        <div className="absolute left-[37%] top-[73.8%] text-lg font-bold text-black">
+        <div className="absolute left-[39%] top-[68.2%] text-lg  font-bold text-black">
           বর্তমান ঠিকানা
         </div>
-        <div className="absolute left-[37%] top-[76.8%] text-sm text-black">
+        <div className="absolute left-[39%] top-[71.2%] text-[11px]  text-black">
           {presentAddress}
         </div>
+        <div className="absolute left-[39%] font-bold top-[76.5%] text-lg  text-black">
+          স্থায়ী ঠিকানা
+        </div>
+        <div className="absolute left-[39%] top-[79.2%] text-[11px]  text-black">
+          {permanentAddress}
+        </div>
 
-        <div className="absolute bottom-5  text-center text-[12px]  left-[15%]">
+        <div className="absolute bottom-28  text-center text-[11px]   left-[15.8%]">
           <span className="text-red-500">
             {" "}
             উপরে প্রদর্শিত তথ্যসমূহ জাতীয় পরিচয়পত্র সংশ্লিষ্ট, ভোটার তালিকার
@@ -190,7 +217,7 @@ const Nid = () => {
           Signature & Seal Arent Required.
         </div>
 
-        <div className="absolute top-[27%] left-[19%] w-[15%] h-[15%] ">
+        <div className="absolute top-[25.6%] left-[20.9%] w-[13.9%] h-[12%] ">
           <img
             src={photo}
             alt="User"
@@ -199,7 +226,17 @@ const Nid = () => {
               e.target.src = "fallback-image.png"; // Fallback image URL
             }}
           />
-          <p className="text-center font-bold">{nameEn}</p>
+          <p className="text-center ">{nameEn}</p>
+        </div>
+        <div className="absolute top-[40%] left-[21.9%] w-[12.9%] h-[10%] ">
+          <img
+            src={imge}
+            alt="User"
+            className="w-full h-full rounded-md"
+            onError={(e) => {
+              e.target.src = "fallback-image.png"; // Fallback image URL
+            }}
+          />
         </div>
       </div>
       <button onClick={handlePrint} className="w-full btn-primary">
