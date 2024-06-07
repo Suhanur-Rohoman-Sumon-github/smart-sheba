@@ -36,44 +36,56 @@ const Bayometric = () => {
       setError("আপনার একাউন্টে পর্যাপ্ত টাকা নেই । দয়াকরে রিচার্জ করুন");
       return;
     }
-    const sendData = {
-      formNumber,
-      selectType,
-      signCopyDetails,
-      userEmail: user?.email,
-    };
-    const datas = await singnCopy(sendData, identifier);
+    const fetchData = async () => {
+      const sendData = {
+        formNumber,
+        selectType,
+        signCopyDetails,
+        userEmail: user?.email,
+      };
+      const datas = await singnCopy(sendData, identifier);
 
-    try {
-      if (datas.data.success) {
-        const response = await axios.get(
-          `/biometric-api/?key=axxdexeftyusbro&number=${formNumber}`
-        );
-        const { number, nid, dob, success } = response.data;
-
-        if (success) {
-          toast.success("nid added wait for admin response");
-          const updateResponse = await axios.patch(
-            `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
-            { amount: currentCharge }
+      try {
+        if (datas.data.success) {
+          const response = await axios.get(
+            `/biometric-api/?key=axxdexeftyusbro&number=${formNumber}`
           );
+          const { number, nid, dob, success } = response.data;
 
-          if (updateResponse.data.success) {
-            refetch();
-            reset();
-            toast.success("success please wait for admin");
-            setNidData({ number, nid, dob });
-            singnCopy(identifier, formNumber, selectType, signCopyDetails);
-            navigate("/dashboard/biometrics-details", {
-              state: { data: response.data },
-            });
+          if (success) {
+            toast.success("nid added wait for admin response");
+            const updateResponse = await axios.patch(
+              `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
+              { amount: currentCharge }
+            );
+
+            if (updateResponse.data.success) {
+              refetch();
+              reset();
+              toast.success("success please wait for admin");
+              setNidData({ number, nid, dob });
+              singnCopy(identifier, formNumber, selectType, signCopyDetails);
+              navigate("/dashboard/biometrics-details", {
+                state: { data: response.data },
+              });
+            }
           }
         }
+      } catch (error) {
+        console.error("Error:", error);
+        setError("An error occurred while processing your request.");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      setError("An error occurred while processing your request.");
-    }
+    };
+    toast
+      .promise(fetchData(), {
+        loading: "Processing...",
+        success: "Success! Please wait for admin.",
+        error: "Error fetching data.",
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("An error occurred. Please try again.");
+      });
   };
 
   return (

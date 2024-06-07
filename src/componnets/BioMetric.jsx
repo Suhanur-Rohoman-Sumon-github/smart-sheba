@@ -16,12 +16,12 @@ const BioMetric = () => {
   const textToCopy = `👤 NUMBER INFO 👤\n❏ NUMBER ➦ ${number}\n❏ NID ➦ ${nid}\n❏ DATE OF BIRTH ➦ ${dob}`;
 
   return (
-    <div className="flex justify-center items-center md:mt-28 flex-col border mx-8">
+    <div className="md:flex justify-center items-center md:mt-28 flex-col border md:mx-8">
       <div className="  mb-4 p-16 shadow-2xl">
         <p>👤 NUMBER INFO 👤</p>
-        <p>{`❏ NUMBER ➦ ${number}`}</p>
+        <p>{`❏ NUMBER ➦ ${number} `}</p>
         <p>{`❏ NID ➦ ${nid}`}</p>
-        <p>{`❏ DATE OF BIRTH ➦ ${dob}`}</p>
+        <p>{`❏ DATE OF BIRTH ➦${dob}`}</p>
         <CopyToClipboard text={textToCopy}>
           <button className="bg-blue-500 mt-8 hover:bg-blue-700 text-white font-bold mx-auto py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             <FaCopy className="inline-block mr-2" /> Copy Text

@@ -29,34 +29,42 @@ const ServerCopyUnoficial = () => {
       return;
     }
     const { nidNo, dob } = data;
-    const response = await axios.get(
-      `/api/unofficial/apiown.php?key=signCopy&nid=${nidNo}&dob=${dob}`
-    );
-    console.log(response.data.voter.voter_no);
 
-    if (response.data.data.response === "success") {
-      navigate("/dashboard/nid", {
-        state: {
-          data: response.data.data,
-          nidNo: response.data.voter.voter_no,
-          serial: response.data.voter.sl_no,
-        },
-      });
-      const responses = await axios.patch(
-        `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
-        {
-          amount: currentCharge,
-        }
+    const fetchData = async () => {
+      const response = await axios.get(
+        `/api/unofficial/apiown.php?key=signCopy&nid=${nidNo}&dob=${dob}`
       );
-
-      if (responses.data.success) {
+      if (response.data.data.response === "success") {
+        navigate("/dashboard/nid", {
+          state: {
+            data: response.data.data,
+            nidNo: response.data.voter.voter_no,
+            serial: response.data.voter.sl_no,
+          },
+        });
+        await axios.patch(
+          `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
+          {
+            amount: currentCharge,
+          }
+        );
         refetch();
         reset();
-        toast.success("success please wait for admin");
+      } else {
+        throw new Error("Data fetch failed");
       }
-    }
+    };
 
-    refetch();
+    toast
+      .promise(fetchData(), {
+        loading: "Processing...",
+        success: "Success! Please wait for admin.",
+        error: "Error fetching data.",
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("An error occurred. Please try again.");
+      });
   };
   return (
     <div>
