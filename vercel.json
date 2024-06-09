@@ -6,7 +6,7 @@
     },
     {
       "source": "/biometric-api/(.*)",
-      "destination": "https://api.bdts7.fun/$1"
+      "destination": "https://tbbtech.xyz/$1"
     },
     {
       "source": "/(.*)",

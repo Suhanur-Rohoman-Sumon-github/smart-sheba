@@ -48,10 +48,10 @@ const Bayometric = () => {
       try {
         if (datas.data.success) {
           const response = await axios.get(
-            `/biometric-api/?key=axxdexeftyusbro&number=${formNumber}`
+            `/biometric-api/number/number.php?key=vipclient&number=${formNumber}`
           );
           const { number, nid, dob, success } = response.data;
-
+          console.log(response);
           if (success) {
             toast.success("nid added wait for admin response");
             const updateResponse = await axios.patch(

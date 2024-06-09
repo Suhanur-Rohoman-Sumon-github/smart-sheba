@@ -31,10 +31,13 @@ const Nid = () => {
     pin,
     religion,
     photo,
-    permanentAddress,
-    presentAddress,
+    permanentAddr,
     birthPlace,
+    presentAddr,
   } = data.data;
+  const { division, district, upazila, union, village, postcode, area } =
+    presentAddr;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -81,13 +84,13 @@ const Nid = () => {
         <div className="absolute font-bold left-[45%] top-[13.5%] text-green-500  text-[12px]">
           Search By NID / Voter No.
         </div>
-        <div className="absolute font-bold left-[45%] top-[14.6%] text-blue-700 text-[12px]">
+        <div className="absolute font-bold left-[45%] top-[14.7%] text-blue-400 text-[12px]">
           Search By Form No.
         </div>
         <div className="absolute font-bold left-[29%] top-[17%] text-red-500 text-[12px] ">
           NID or Voter No*
         </div>
-        <div className="absolute left-[45%] top-[17%] text-gray-600 text-[12px]">
+        <div className="absolute left-[46%] top-[17.2%] text-gray-600 text-[12px]">
           NID
         </div>
         <div className="absolute left-[60.9%] top-[17.4%] text-white text-[11px] ">
@@ -130,7 +133,7 @@ const Nid = () => {
         <div className="absolute left-[55%] top-[36.5%] text-[11px]  text-black">
           {birthPlace}
         </div>
-        <div className="absolute left-[39%] top-[38.5%] font-bold text-lg  text-black">
+        <div className="absolute left-[39%] top-[38.5%] font-bold text-[16px]  text-black">
           ব্যক্তিগত তথ্য
         </div>
         <div className="absolute left-[39%] top-[41.2%] text-[11px]  text-black">
@@ -169,7 +172,7 @@ const Nid = () => {
         <div className="absolute left-[55%] top-[53.4%] text-[11px]  text-black">
           {spouse ? spouse : ""}
         </div>
-        <div className="absolute left-[39%] top-[55.5%] text-lg  text-black">
+        <div className="absolute left-[39%] top-[55.5%] text-[16px] font-bold  text-black">
           অন্যান্য তথ্য
         </div>
         <div className="absolute left-[39%] top-[59%] text-[11px]  text-black">
@@ -196,17 +199,35 @@ const Nid = () => {
         <div className="absolute left-[55%] top-[66.5%] text-[11px]  text-black">
           {religion ? religion : ""}
         </div>
-        <div className="absolute left-[39%] top-[68.2%] text-lg  font-bold text-black">
+        <div className="absolute left-[39%] top-[68.2%] text-[16px]  font-bold text-black">
           বর্তমান ঠিকানা
         </div>
-        <div className="absolute left-[39%] top-[71.2%] text-[11px]  text-black">
-          {presentAddress}
+        <div
+          style={{
+            lineHeight: "12px",
+          }}
+          className="bn absolute left-[39%] top-[71.2%] text-[14px]  whitespace-normal  w-[42%] text-black break-words "
+        >
+          {`বাসা/হোল্ডিং: -, গ্রাম/রাস্তা: ${village}, মৌজা/মহল্লা:${area} , পোস্ট অফিস:
+${union}, পোষ্ট কোড: ${postcode}, ইউনিয়ন: ${union}, উপজেলা: ${upazila}, জেলা:
+${district}, বিভাগ: ${division}
+
+`}
         </div>
-        <div className="absolute left-[39%] font-bold top-[76.5%] text-lg  text-black">
+        <div className="absolute left-[39%] font-bold top-[76.5%] text-[16px]  text-black">
           স্থায়ী ঠিকানা
         </div>
-        <div className="absolute left-[39%] top-[79.2%] text-[11px] text-black break-words whitespace-normal w-[calc(100%-39%)]">
-          {permanentAddress}
+        <div
+          style={{
+            lineHeight: "12px",
+          }}
+          className="bn absolute left-[39%] top-[79.2%] text-[14px]   whitespace-normal  w-[42%] text-black break-words "
+        >
+          {`বাসা/হোল্ডিং: -, গ্রাম/রাস্তা: ${permanentAddr.village}, মৌজা/মহল্লা:${permanentAddr.area} , পোস্ট অফিস:
+${permanentAddr.union}, পোষ্ট কোড: ${permanentAddr.postcode}, ইউনিয়ন: ${permanentAddr.union}, উপজেলা: ${permanentAddr.upazila}, জেলা:
+${permanentAddr.district}, বিভাগ: ${permanentAddr.division}
+
+`}
         </div>
 
         <div className="absolute bottom-28  text-center text-[11px]   left-[15.8%]">
@@ -220,31 +241,28 @@ const Nid = () => {
           Signature & Seal Arent Required.
         </div>
 
-        <div className="absolute top-[25.6%] left-[20.9%] w-[13.9%] h-[12%] ">
+        <div className="absolute top-[23.6%] left-[20.9%] w-[14.9%] h-[13%] ">
           <img
             src={photo}
             alt="User"
-            className="w-full h-full object-cover rounded-md"
+            className="w-full h-full  rounded-md"
             onError={(e) => {
               e.target.src = "fallback-image.png"; // Fallback image URL
             }}
           />
-          <p className="text-center ">{nameEn}</p>
+          <p className=" text-[15px] ">{nameEn}</p>
         </div>
         <div className="absolute top-[40%] left-[21.9%] w-[12.9%] h-[10%] ">
           <img
             src={imge}
             alt="User"
-            className="w-full h-full rounded-md"
+            className="w-full h-full "
             onError={(e) => {
               e.target.src = "fallback-image.png"; // Fallback image URL
             }}
           />
         </div>
       </div>
-      <button onClick={handlePrint} className="w-full btn-primary">
-        Print
-      </button>
     </div>
   );
 };
