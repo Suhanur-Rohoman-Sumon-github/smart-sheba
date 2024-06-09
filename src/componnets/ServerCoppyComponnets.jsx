@@ -263,6 +263,9 @@ ${permanentAddr.district}, বিভাগ: ${permanentAddr.division}
           />
         </div>
       </div>
+      <button onClick={handlePrint} className="btn-primary w-full">
+        save
+      </button>
     </div>
   );
 };
