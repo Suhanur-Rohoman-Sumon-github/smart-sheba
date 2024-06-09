@@ -11,3 +11,12 @@
 .text-primary {
   @apply text-4xl md:text-6xl xl:text-7xl font-bold text-[#0b3558];
 }
+
+@font-face {
+  font-family: "BanglaFont";
+  src: url("./fonts/Bangla.ttf") format("truetype");
+}
+
+.bn {
+  font-family: "BanglaFont", Arial, sans-serif;
+}

@@ -26,6 +26,7 @@ import AdminRequests from "../pages/Dashboard/admin/AdminRequests";
 import ServerCoppyComponnets from "../componnets/ServerCoppyComponnets";
 import SerCoppyTest from "../componnets/SerCoppyTest";
 import BioMetric from "../componnets/BioMetric";
+import CreateNidComponnets from "../componnets/CreateNidComponnets";
 
 const router = createBrowserRouter([
   {
@@ -124,6 +125,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/biometrics-details",
         element: <BioMetric />,
+      },
+      {
+        path: "/dashboard/create-nid-download",
+        element: <CreateNidComponnets />,
       },
     ],
   },

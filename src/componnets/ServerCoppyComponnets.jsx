@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 
@@ -69,7 +69,10 @@ const Nid = () => {
           className="absolute inset-0 w-full h-full object-cover"
           alt="Background"
         />
-        <div className="absolute left-[27%] top-[9%] text-[16px] text-yellow-400 ">
+        <div
+          style={{ fontFamily: "'SolaimanLipi', Arial, sans-serif" }}
+          className="absolute left-[27%] top-[9%] text-[16px] text-yellow-400 "
+        >
           National Identity Registration Wing (NIDW)
         </div>
         <div className="absolute left-[39%] font-bold top-[11.5%] text-pink-500 text-[14px] ">
@@ -202,7 +205,7 @@ const Nid = () => {
         <div className="absolute left-[39%] font-bold top-[76.5%] text-lg  text-black">
           স্থায়ী ঠিকানা
         </div>
-        <div className="absolute left-[39%] top-[79.2%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[79.2%] text-[11px] text-black break-words whitespace-normal w-[calc(100%-39%)]">
           {permanentAddress}
         </div>
 
