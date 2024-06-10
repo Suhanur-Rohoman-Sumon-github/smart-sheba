@@ -5,12 +5,17 @@ import Charge from "../../../componnets/Charge";
 import toast, { Toaster } from "react-hot-toast";
 import pdf from "../../../assets/pdf.png";
 import { useNavigate } from "react-router-dom";
+import useAprovedPayments from "../../../hooks/useAprovedPayment";
+import axios from "axios";
+import useContexts from "../../../hooks/useContexts";
 const CreateNid = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [signature, setSignature] = useState(null);
   const [customImageUrl, setCustomImageUrl] = useState(null);
   const [customSignature, setCustomSignature] = useState(null);
-
+  const [error, setError] = useState("");
+  const { user } = useContexts();
+  const { refetch, payments } = useAprovedPayments();
   const navigate = useNavigate();
   const {
     register,
@@ -69,8 +74,22 @@ const CreateNid = () => {
   };
   const imageUrls = imageUrl ? imageUrl : customImageUrl;
   const signatures = signature ? signature : customSignature;
+  const currentCharge = 10;
   const onSubmit = async (data) => {
+    if (payments?.data?.amount < currentCharge) {
+      setError("আপনার একাউন্টে পর্যাপ্ত টাকা নেই । দয়াকরে রিচার্জ করুন");
+      return;
+    }
     console.log(data);
+
+    const response = await axios.patch(
+      `https://telent-finder.vercel.app/api/v1/update-payments?email=${user?.email}`,
+      {
+        amount: currentCharge,
+      }
+    );
+    refetch();
+    console.log(response);
     navigate("/dashboard/create-nid-download", {
       state: {
         data: data,
@@ -82,6 +101,7 @@ const CreateNid = () => {
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
+    console.log(file);
     if (!file) return;
 
     setLoading(true);
@@ -89,13 +109,10 @@ const CreateNid = () => {
     formData.append("pdf_file", file);
 
     try {
-      const response = await fetch(
-        "https://esservice.pythonanywhere.com/ext/faysaladmin",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch("/crete-nid-api/ext/onlineserviceguru", {
+        method: "POST",
+        body: formData,
+      });
 
       if (!response.ok) {
         throw new Error("Network response was not ok.");
@@ -169,7 +186,7 @@ const CreateNid = () => {
         </div>
 
         <div className="divider">OR</div>
-        <div className="flex items-center justify-center gap-8">
+        <div className="md:flex items-center justify-center gap-8 ">
           <div className="flex items-center ">
             <input
               id="nidFile"
@@ -188,7 +205,7 @@ const CreateNid = () => {
             </label>
             <img
               src={imageUrl ? imageUrl : customImageUrl}
-              className="w-14 h-14 ml-4"
+              className="w-14 h-14 ml-4 "
               alt=""
             />
           </div>
@@ -210,7 +227,7 @@ const CreateNid = () => {
             </label>
             <img
               src={signature ? signature : customSignature}
-              className="w-16 h-16 ml-4"
+              className="w-16 h-16 ml-4 mt-4 md:mt-0"
               alt=""
             />
           </div>

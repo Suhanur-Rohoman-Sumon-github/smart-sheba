@@ -133,19 +133,7 @@ const Bayometric = () => {
             <span className="text-red-500">This field is required</span>
           )}
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="signCopyDetails"
-            className="block text-gray-700 text-sm font-bold mb-2 text-center"
-          >
-            বায়োমেট্রিক সম্পর্কে বিস্তারিত লিখুনঃ(যদি কিছু বলার থাকে)
-          </label>
-          <textarea
-            id="signCopyDetails"
-            {...register("signCopyDetails")}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
+
         <p className="text-red-500">{error}</p>
         <div className="flex items-center justify-center">
           <button
@@ -163,7 +151,7 @@ const Bayometric = () => {
             <thead>
               <tr className="text-xl text-[#0b3558] ">
                 <th>No</th>
-                <th>State</th>
+
                 <th>Issue For</th>
                 <th>Phone Number</th>
               </tr>
@@ -172,15 +160,7 @@ const Bayometric = () => {
               {biometric?.data?.map((sign, index) => (
                 <tr className="text-[#0066FF]" key={payments._id}>
                   <td>{index + 1}</td>
-                  <td>
-                    {sign.state === "pending" ? (
-                      "pending"
-                    ) : (
-                      <button className={"flex items-center   btn-primary"}>
-                        <FaCircleArrowDown />
-                      </button>
-                    )}
-                  </td>
+
                   <td>{sign.selectType}</td>
                   <td>{sign.formNumber}</td>
                 </tr>

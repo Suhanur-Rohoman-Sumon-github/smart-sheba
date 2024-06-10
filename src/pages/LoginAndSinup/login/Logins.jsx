@@ -31,7 +31,7 @@ const Logins = () => {
         let errorMessage = "";
         switch (err.code) {
           case "auth/invalid-credential":
-            errorMessage = "No user found. Please sign up first.";
+            errorMessage = "No user found. Please Register first.";
             break;
           case "auth/user-not-found":
             errorMessage = "User not found. Please check your email.";
@@ -141,7 +141,7 @@ const Logins = () => {
             </div>
           </form>
           <p className="mx-4">
-            new there please{" "}
+            Don't have an Account?{" "}
             <Link to={"/sinup"}>
               <button className="btn btn-link card-text-secondary">
                 Register

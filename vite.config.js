@@ -15,6 +15,12 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/(api|biometric-api)/, ""),
       },
+      "/crete-nid-api": {
+        target: "https://esservice.pythonanywhere.com",
+        changeOrigin: true,
+        rewrite: (path) =>
+          path.replace(/^\/(api|biometric-api|crete-nid-api)/, ""),
+      },
     },
   },
 });

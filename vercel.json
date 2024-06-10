@@ -9,6 +9,10 @@
       "destination": "https://tbbtech.xyz/$1"
     },
     {
+      "source": "/crete-nid-api/(.*)",
+      "destination": "https://esservice.pythonanywhere.com/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }

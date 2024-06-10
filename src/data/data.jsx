@@ -97,7 +97,7 @@ export const navDatas = [
   },
   {
     icon: <FaWhatsapp />,
-    path: "",
+    path: "https://chat.whatsapp.com/D78poyq7tHeDsjznJ1mxvg",
     element: "হোয়াইটস অ্যাাপ",
   },
 ];
@@ -117,5 +117,15 @@ export const adminNavData = [
     icon: <FaCcMastercard />,
     path: "/dashboard/payment-requests",
     element: "Payment Requests",
+  },
+  {
+    icon: <FaCcMastercard />,
+    path: "/dashboard/add-payments",
+    element: "add payments manually",
+  },
+  {
+    icon: <FaCcMastercard />,
+    path: "/dashboard/update-charge",
+    element: "update current charge",
   },
 ];

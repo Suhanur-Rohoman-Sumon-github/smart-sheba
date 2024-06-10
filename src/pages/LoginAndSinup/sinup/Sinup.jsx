@@ -160,7 +160,7 @@ const Sinup = () => {
 
             <div className="form-control">
               <label className="label">
-                <span className="">confirm Password</span>
+                <span className="">Confirm Password</span>
               </label>
               <div className="relative">
                 <input
@@ -198,10 +198,10 @@ const Sinup = () => {
             </div>
           </form>
           <p className="mx-4">
-            have an account plaeace
+            Have An Account Please
             <Link to={"/"}>
               <button className="btn btn-link card-text-secondary">
-                login{" "}
+                Login{" "}
               </button>
             </Link>{" "}
           </p>

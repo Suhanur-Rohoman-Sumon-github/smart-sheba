@@ -90,13 +90,13 @@ const Nid = () => {
         <div className="absolute font-bold left-[29%] top-[14.5%] text-red-500 text-[12px] ">
           NID or Voter No*
         </div>
-        <div className="absolute left-[46%] top-[14.5%] text-gray-600 text-[12px]">
+        <div className="absolute left-[46%] top-[14.7%] text-gray-600 text-[12px]">
           NID
         </div>
-        <div className="absolute left-[60.9%] top-[15%] text-white text-[11px] ">
+        <div className="absolute left-[60.9%] top-[15%] text-white text-[10px] ">
           Submit
         </div>
-        <div className="absolute left-[83%] top-[9.5%] text-white  text-[11.6px]">
+        <div className="absolute left-[83.2%] top-[9.5%] text-white  text-[10px]">
           Home
         </div>
 
@@ -109,49 +109,49 @@ const Nid = () => {
         <div className="absolute left-[56%] top-[24.7%] text-[13px] text-black">
           {nationalId}
         </div>
-        <div className="absolute left-[39%] top-[27.1%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[27.6%] text-[11px]  text-black">
           পিন নম্বর
         </div>
-        <div className="absolute left-[55%] top-[27.1%]  text-[11px]  text-black">
+        <div className="absolute left-[55%] top-[27.6%]  text-[11px]  text-black">
           {pin}
         </div>
-        <div className="absolute left-[39%] top-[29.5%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[30%] text-[11px]  text-black">
           ভোটার সিরিয়াল
         </div>
-        <div className="absolute left-[55%] top-[29.5%] text-[11px]  text-black">
+        <div className="absolute left-[55%] top-[30%] text-[11px]  text-black">
           {nidNo}
         </div>
-        <div className="absolute left-[39%] top-[32%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[32.8%] text-[11px]  text-black">
           ভোটার এলাকা
         </div>
-        <div className="absolute left-[55%] top-[32%] text-[11px]  text-black">
+        <div className="absolute left-[55%] top-[32.8%] text-[11px]  text-black">
           {voterArea}
         </div>
-        <div className="absolute left-[39%] top-[34.5%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[35%] text-[11px]  text-black">
           জন্মস্থান
         </div>
-        <div className="absolute left-[55%] top-[34.5%] text-[11px]  text-black">
+        <div className="absolute left-[55%] top-[35%] text-[11px]  text-black">
           {birthPlace}
         </div>
         <div className="absolute left-[39%] top-[37.5%] font-bold text-[16px]  text-black">
           ব্যক্তিগত তথ্য
         </div>
-        <div className="absolute left-[39%] top-[40.2%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[40.6%] text-[11px]  text-black">
           নাম (বাংলা)
         </div>
-        <div className="absolute left-[55%] top-[40.2%] text-[11px]   text-black">
+        <div className="absolute left-[55%] top-[40.6%] text-[11px]   text-black">
           {name}
         </div>
-        <div className="absolute left-[39%] top-[43%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[43.5%] text-[11px]  text-black">
           নাম (ইংরেজি)
         </div>
-        <div className="absolute left-[55%] top-[43%] text-[11px]  text-black">
+        <div className="absolute left-[55%] top-[43.5%] text-[11px]  text-black">
           {nameEn}
         </div>
-        <div className="absolute left-[39%] top-[45.5%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[46%] text-[11px]  text-black">
           জন্ম তারিখ
         </div>
-        <div className="absolute left-[55%] top-[45.5%] text-[11px]  text-black">
+        <div className="absolute left-[55%] top-[46%] text-[11px]  text-black">
           {dateOfBirth}
         </div>
         <div className="absolute left-[39%] top-[48.5%] text-[11px]  text-black">
@@ -175,10 +175,10 @@ const Nid = () => {
         <div className="absolute left-[39%] top-[56.5%] text-[16px] font-bold  text-black">
           অন্যান্য তথ্য
         </div>
-        <div className="absolute left-[39%] top-[59%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[59.5%] text-[11px]  text-black">
           লিঙ্গ
         </div>
-        <div className="absolute left-[55%] top-[59%] text-[11px]  text-black">
+        <div className="absolute left-[55%] top-[59.5%] text-[11px]  text-black">
           {gender}
         </div>
         <div className="absolute left-[39%] top-[62%] text-[11px]  text-black">
@@ -187,16 +187,16 @@ const Nid = () => {
         <div className="absolute left-[55%] top-[62%] text-[11px]  text-black">
           {bloodGroup}
         </div>
-        <div className="absolute left-[39%] top-[64.5%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[64.9%] text-[11px]  text-black">
           সিরিয়াল নং
         </div>
-        <div className="absolute left-[55%] top-[64.5%] text-[11px]  text-black">
+        <div className="absolute left-[55%] top-[64.9%] text-[11px]  text-black">
           {serial}
         </div>
-        <div className="absolute left-[39%] top-[67%] text-[11px]  text-black">
+        <div className="absolute left-[39%] top-[67.5%] text-[11px]  text-black">
           ধর্ম
         </div>
-        <div className="absolute left-[55%] top-[66%] text-[11px]  text-black">
+        <div className="absolute left-[55%] top-[66.5%] text-[11px]  text-black">
           {religion ? religion : ""}
         </div>
         <div className="absolute left-[39%] top-[70%] text-[16px]  font-bold text-black">
@@ -250,9 +250,9 @@ ${permanentAddr.district}, বিভাগ: ${permanentAddr.division}
               e.target.src = "fallback-image.png"; // Fallback image URL
             }}
           />
-          <p className=" text-[15px] ">{nameEn}</p>
+          <p className=" text-[13px] text-center mt-2">{nameEn}</p>
         </div>
-        <div className="absolute top-[40%] left-[21.9%] w-[12.9%] h-[10%] ">
+        <div className="absolute top-[41%] left-[21.9%] w-[12.9%] h-[10%] ">
           <img
             src={imge}
             alt="User"

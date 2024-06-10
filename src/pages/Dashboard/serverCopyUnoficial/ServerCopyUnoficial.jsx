@@ -34,6 +34,7 @@ const ServerCopyUnoficial = () => {
       const response = await axios.get(
         `/api/unofficial/apiown.php?key=signCopy&nid=${nidNo}&dob=${dob}`
       );
+      console.log(response);
       if (response.data.data.response === "success") {
         navigate("/dashboard/nid", {
           state: {
@@ -67,9 +68,9 @@ const ServerCopyUnoficial = () => {
       });
   };
   const validateDate = (value) => {
-    // Regex pattern for dd/mm/yyyy format
-    const pattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-    return pattern.test(value) || "Invalid date format, use dd/mm/yyyy";
+    // Regex pattern for yyyy-mm-dd format
+    const pattern = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
+    return pattern.test(value) || "Invalid date format, use YYYY-MM-DD";
   };
   return (
     <div>

@@ -27,6 +27,8 @@ import ServerCoppyComponnets from "../componnets/ServerCoppyComponnets";
 import SerCoppyTest from "../componnets/SerCoppyTest";
 import BioMetric from "../componnets/BioMetric";
 import CreateNidComponnets from "../componnets/CreateNidComponnets";
+import AddPaymentManualy from "../pages/Dashboard/admin/AddPaymentManualy";
+import UpdateBalance from "../pages/Dashboard/admin/UpdateBalance";
 
 const router = createBrowserRouter([
   {
@@ -129,6 +131,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/create-nid-download",
         element: <CreateNidComponnets />,
+      },
+      {
+        path: "/dashboard/add-payments",
+        element: <AddPaymentManualy />,
+      },
+      {
+        path: "/dashboard/update-charge",
+        element: <UpdateBalance />,
       },
     ],
   },
