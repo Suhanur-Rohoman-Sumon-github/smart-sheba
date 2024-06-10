@@ -25,41 +25,9 @@ const CreateNidComponnets = () => {
     address,
     bloodGroup,
     pinNumber,
+    principalDate,
   } = data;
-  useEffect(() => {
-    const hub3_code = `<pin>20026815294000403</pin><name>${nameEnglish}</name><DOB>${birthDate}</DOB><FP></FP><F>Right Index</F><TYPE>${bloodGroup}</TYPE><V>2.0</V> <ds>302c0214103fc01240542ed736c0b48858c1c03d80006215021416e73728de9618fedcd368c88d8f3a2e72096d</ds>`;
 
-    console.log(hub3_code);
-
-    const finalEnlishToBanglaNumber = {
-      0: "০",
-      1: "১",
-      2: "২",
-      3: "৩",
-      4: "৪",
-      5: "৫",
-      6: "৬",
-      7: "৭",
-      8: "৮",
-      9: "৯",
-    };
-
-    String.prototype.getDigitBanglaFromEnglish = function () {
-      let retStr = this;
-      for (let x in finalEnlishToBanglaNumber) {
-        retStr = retStr.replace(
-          new RegExp(x, "g"),
-          finalEnlishToBanglaNumber[x]
-        );
-      }
-      return retStr;
-    };
-
-    const date_number = "27/03/2024";
-    const bangla_date_number = date_number.getDigitBanglaFromEnglish();
-
-    document.getElementById("card_date").innerHTML = bangla_date_number;
-  }, []);
   return (
     <div id="__next">
       <main>
@@ -202,11 +170,11 @@ const CreateNidComponnets = () => {
                                     নাম:
                                   </span>
                                   <span
-                                    className=""
+                                    className="bn"
                                     style={{
                                       fontSize: "16.53px",
                                       paddingLeft: "3px",
-                                      WebkitTextStroke: "",
+                                      WebkitTextStroke: "0.4px black",
                                     }}
                                     id="nameBn"
                                   >
@@ -214,7 +182,7 @@ const CreateNidComponnets = () => {
                                   </span>
                                 </p>
                               </div>
-                              <div style={{ marginTop: "1px" }}>
+                              <div style={{ marginTop: "-1px" }}>
                                 <p
                                   className="space-x-2 leading-3"
                                   style={{
@@ -239,7 +207,7 @@ const CreateNidComponnets = () => {
                               </div>
                               <div style={{ marginTop: "1px" }}>
                                 <p
-                                  className="bn space-x-3 leading-3"
+                                  className="bn space-x-3 leading-3 mt-[0.5px]"
                                   style={{ paddingLeft: "1px" }}
                                 >
                                   <span
@@ -282,7 +250,7 @@ const CreateNidComponnets = () => {
                                 </p>
                               </div>
 
-                              <div style={{ marginTop: "-5px" }}>
+                              <div style={{ marginTop: "-3px" }}>
                                 <p
                                   className="space-x-1 leading-3"
                                   style={{ marginTop: "-2px" }}
@@ -303,7 +271,10 @@ const CreateNidComponnets = () => {
                                 </p>
                               </div>
                               <div
-                                style={{ marginTop: "-5px", fontSize: "12px" }}
+                                style={{
+                                  marginTop: "-1px",
+                                  fontSize: "12px",
+                                }}
                               >
                                 <p
                                   className="space-x-1 leading-4 -mt-0.5 "
@@ -468,7 +439,7 @@ const CreateNidComponnets = () => {
                             >
                               প্রদানের তারিখ:
                               <span className="ml-2.5" id="card_date">
-                                ২৭/০৩/২০২৪
+                                {principalDate}
                               </span>
                             </span>
                           </div>

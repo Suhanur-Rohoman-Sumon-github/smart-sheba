@@ -66,6 +66,11 @@ const ServerCopyUnoficial = () => {
         toast.error("An error occurred. Please try again.");
       });
   };
+  const validateDate = (value) => {
+    // Regex pattern for dd/mm/yyyy format
+    const pattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+    return pattern.test(value) || "Invalid date format, use dd/mm/yyyy";
+  };
   return (
     <div>
       <Marque />
@@ -97,17 +102,20 @@ const ServerCopyUnoficial = () => {
             className="block text-gray-700 text-sm font-bold mb-2 text-center"
             htmlFor="dob"
           >
-            DATE OF BIRTH (YY-MM-DD)
+            DATE OF BIRTH (YYYY-MM-DD)
           </label>
           <input
             id="dob"
-            type="date"
-            {...register("dob", { required: true })}
+            type="text"
+            {...register("dob", {
+              required: true,
+              validate: validateDate,
+            })}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Example: 1990-11-30"
           />
           {errors.dob && (
-            <span className="text-red-500">This field is required</span>
+            <span className="text-red-500">{errors.dob.message}</span>
           )}
         </div>
         <Charge title={`আপনার একাউন্ট থেকে ${currentCharge} টাকা কাটা হবে।`} />

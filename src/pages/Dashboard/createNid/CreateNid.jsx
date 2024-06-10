@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 const CreateNid = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [signature, setSignature] = useState(null);
+  const [customImageUrl, setCustomImageUrl] = useState(null);
+  const [customSignature, setCustomSignature] = useState(null);
+
   const navigate = useNavigate();
   const {
     register,
@@ -16,14 +19,63 @@ const CreateNid = () => {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
+  // Function to format the date as dd/mm/yyyy
+  const getFormattedDate = () => {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, "0");
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const year = today.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
 
+  // Function to convert English digits to Bangla digits
+  const convertToBanglaDigits = (englishDate) => {
+    const finalEnlishToBanglaNumber = {
+      0: "০",
+      1: "১",
+      2: "২",
+      3: "৩",
+      4: "৪",
+      5: "৫",
+      6: "৬",
+      7: "৭",
+      8: "৮",
+      9: "৯",
+    };
+
+    return englishDate.replace(
+      /\d/g,
+      (digit) => finalEnlishToBanglaNumber[digit]
+    );
+  };
+
+  const formattedDate = getFormattedDate();
+  const formattedBanglaDate = convertToBanglaDigits(formattedDate);
+
+  // Function to handle NID image file change
+  const handleNidFileChange = (event) => {
+    const file = event.target.files[0];
+    // Process the NID file
+    setCustomImageUrl(URL.createObjectURL(file));
+    console.log("NID file selected:", file);
+  };
+
+  // Function to handle Signature file change
+  const handleSignatureFileChange = (event) => {
+    const file = event.target.files[0];
+    // Process the Signature file
+    setCustomSignature(URL.createObjectURL(file));
+    console.log("Signature file selected:", file);
+  };
+  const imageUrls = imageUrl ? imageUrl : customImageUrl;
+  const signatures = signature ? signature : customSignature;
   const onSubmit = async (data) => {
     console.log(data);
     navigate("/dashboard/create-nid-download", {
       state: {
         data: data,
-        imageUrl: imageUrl,
-        signature: signature,
+        imageUrl: imageUrls,
+        signature: signatures,
       },
     });
   };
@@ -71,7 +123,6 @@ const CreateNid = () => {
         setImageUrl(responseData.photo);
         setSignature(responseData.sign);
       }
-      console.log(responseData.photo);
     } catch (error) {
       console.error("There was a problem with the file upload:", error.message);
       toast.error("File upload failed. Please try again.");
@@ -116,8 +167,54 @@ const CreateNid = () => {
             </div>
           </label>
         </div>
-        {/* <img src={imageUrl} alt="" />
-        <img src={signeture} alt="" /> */}
+
+        <div className="divider">OR</div>
+        <div className="flex items-center justify-center gap-8">
+          <div className="flex items-center ">
+            <input
+              id="nidFile"
+              type="file"
+              accept="image/*"
+              onChange={handleNidFileChange}
+              className="hidden"
+            />
+            <label htmlFor="nidFile" className="">
+              <span
+                style={{ fontFamily: "'SolaimanLipi', Arial, sans-serif" }}
+                className=" cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                NID Image
+              </span>
+            </label>
+            <img
+              src={imageUrl ? imageUrl : customImageUrl}
+              className="w-14 h-14 ml-4"
+              alt=""
+            />
+          </div>
+          <div className=" flex items-center ">
+            <input
+              id="signatureFile"
+              type="file"
+              accept="image/*"
+              onChange={handleSignatureFileChange}
+              className="hidden"
+            />
+            <label htmlFor="signatureFile" className="">
+              <span
+                style={{ fontFamily: "'SolaimanLipi', Arial, sans-serif" }}
+                className="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Signature
+              </span>
+            </label>
+            <img
+              src={signature ? signature : customSignature}
+              className="w-16 h-16 ml-4"
+              alt=""
+            />
+          </div>
+        </div>
         <div className="mb-4">
           <label
             htmlFor="nameBangla"
@@ -254,7 +351,7 @@ const CreateNid = () => {
           <input
             id="principalDate"
             type="text"
-            value="30/03/2024"
+            value={formattedBanglaDate}
             {...register("principalDate")}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -280,16 +377,16 @@ const CreateNid = () => {
           >
             ঠিকানাঃ
           </label>
-          <input
+          <textarea
             id="address"
-            type="text"
             {...register("address")}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-8 px-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="ঠিকানা: বাসা/হোল্ডিং: (Holding), গ্রাম/রাস্তা: (গ্রাম, মৌজা), ডাকঘর: (Post Office - Postal Code), উপজেলা, সিটি কর্পোরেশন/পৌরসভা, জেলা"
           />
         </div>
         {/* Other form fields */}
         <Charge title={"আপনার একাউন্ট থেকে 5 টাকা কাটা হবে।"} />
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center">
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

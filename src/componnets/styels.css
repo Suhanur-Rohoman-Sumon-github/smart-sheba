@@ -1041,7 +1041,7 @@ video {
   row-gap: 1.25rem;
 }
 .gap-y-\[10px\] {
-  row-gap: 10px;
+  row-gap: 8px;
 }
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
