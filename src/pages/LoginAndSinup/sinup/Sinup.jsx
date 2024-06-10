@@ -51,11 +51,18 @@ const Sinup = () => {
       .catch((err) => console.error(err));
   };
   // when you will login with the google. this function will take your information and post it in database with post method. After login, you wil redirect to the home page.
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async () => {
     // call the handleGoogleSinin function there and create a google sin up user in our database
     handleGoogleSinin()
-      .then((result) => {
+      .then(async (result) => {
         console.log(result.user);
+        const response = await axios.post(
+          `https://telent-finder.vercel.app/api/v1/set-payments?email=${result.user.email}`,
+          {
+            userEmail: result.user.email,
+            amount: 0,
+          }
+        );
         navigate("dashboard/create-nid");
       })
       .catch((err) => console.error(err));
@@ -63,19 +70,6 @@ const Sinup = () => {
   return (
     <div className="hero min-h-screen pt-16">
       <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="flex  md:hidden text-center lg:text-left md:mr-4">
-          <div>
-            <h1 className="text-primary">
-              <span className="text-[#0069ff]"> Create your</span> <br /> own
-              booking calendar
-            </h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-          </div>
-        </div>
         <div
           data-aos="fade-right"
           className="card flex-shrink-0 p-4 w-full max-w-md shadow-2xl border "
@@ -205,25 +199,12 @@ const Sinup = () => {
           </form>
           <p className="mx-4">
             have an account plaeace
-            <Link to={"/login"}>
+            <Link to={"/"}>
               <button className="btn btn-link card-text-secondary">
                 login{" "}
               </button>
             </Link>{" "}
           </p>
-        </div>
-        <div className="hidden md:flex text-center lg:text-left md:mr-4">
-          <div>
-            <h1 className="text-primary">
-              <span className="text-[#0069ff]"> Create your</span> <br /> own
-              booking calendar
-            </h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-          </div>
         </div>
       </div>
     </div>

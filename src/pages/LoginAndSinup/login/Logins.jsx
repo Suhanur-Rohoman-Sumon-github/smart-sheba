@@ -36,7 +36,15 @@ const Logins = () => {
   const handleGoogleLogin = () => {
     // call handleGoogleSinin function to sign in with Google
     handleGoogleSinin()
-      .then((result) => {
+      .then(async (result) => {
+        const response = await axios.post(
+          `https://telent-finder.vercel.app/api/v1/set-payments?email=${result.user.email}`,
+          {
+            userEmail: result.user.email,
+            amount: 0,
+          }
+        );
+        console.log(response.data);
         navigate("/dashboard/create-nid");
       })
       .catch((err) => console.error(err));
