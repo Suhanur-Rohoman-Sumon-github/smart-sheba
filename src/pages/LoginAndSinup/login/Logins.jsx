@@ -7,9 +7,9 @@ import { v4 as uuidv4 } from "uuid";
 import useContexts from "../../../hooks/useContexts";
 
 const Logins = () => {
-  console.log(useContexts);
   const { handleGoogleSinin, handleLogin } = useContexts();
-
+  const [error, setError] = useState("");
+  console.log(error);
   // call navigate from react useNavigate()
   const navigate = useNavigate();
   const id = uuidv4();
@@ -23,13 +23,29 @@ const Logins = () => {
   // this is only for login with email.
   const onSubmit = (data) => {
     const { email, password } = data;
-    // call handleLogin funtion to login withe email and password
     handleLogin(email, password)
       .then((result) => {
         navigate("/dashboard/create-nid");
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        let errorMessage = "";
+        switch (err.code) {
+          case "auth/invalid-credential":
+            errorMessage = "No user found. Please sign up first.";
+            break;
+          case "auth/user-not-found":
+            errorMessage = "User not found. Please check your email.";
+            break;
+          case "auth/wrong-password":
+            errorMessage = "Incorrect password. Please try again.";
+            break;
+          default:
+            errorMessage = err.message;
+        }
+        setError(errorMessage);
+      });
   };
+
   // when you will login with the facebook, you wil redirect to the home page.
 
   // when you will login with the google. this function will take your information and post it in database with post method. After login, you wil redirect to the home page.
@@ -47,7 +63,7 @@ const Logins = () => {
         console.log(response.data);
         navigate("/dashboard/create-nid");
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("firebase", err));
   };
   return (
     <div className="hero min-h-screen">
@@ -77,7 +93,7 @@ const Logins = () => {
               <input
                 type="email"
                 {...register("email", { required: true })}
-                placeholder="email"
+                placeholder="Email"
                 className="input input-bordered"
               />
             </div>
@@ -99,7 +115,7 @@ const Logins = () => {
                       required: true,
                     }
                   )}
-                  placeholder="password"
+                  placeholder="Password"
                   className="input input-bordered  w-full"
                 />
                 <button
@@ -128,23 +144,11 @@ const Logins = () => {
             new there please{" "}
             <Link to={"/sinup"}>
               <button className="btn btn-link card-text-secondary">
-                sinup
+                Register
               </button>
             </Link>{" "}
           </p>
-        </div>
-        <div className="hidden md:flex text-center lg:text-left md:mr-4">
-          <div>
-            <h1 className="text-primary">
-              <span className="text-[#0069ff]">Welcome Back!</span> <br /> Log
-              in to Your Account
-            </h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-          </div>
+          <p className="text-red-500 text-center">{error}</p>
         </div>
       </div>
     </div>
