@@ -62,7 +62,7 @@ const Nid = () => {
     return <div>No data found.</div>;
   }
   return (
-    <div>
+    <div className="relative ">
       <div
         ref={componentRef}
         className="relative bg-gray-200 mt-10 w-[750px] h-[930px] mx-auto"
@@ -265,7 +265,7 @@ ${permanentAddr.district}, বিভাগ: ${permanentAddr.division}
       </div>
       <button
         onClick={handlePrint}
-        className="btn-primary w-full overflow-auto"
+        className="absolute bottom-1 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         save
       </button>
