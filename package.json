@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "proxy": "https://api.foxithub.com/",
+  "homepage": "http://smartsheba.xyz/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

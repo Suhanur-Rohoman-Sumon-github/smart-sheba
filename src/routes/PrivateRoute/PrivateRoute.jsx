@@ -6,10 +6,6 @@ const PrivateRoutes = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  if (loading) {
-    return <span className="loading loading-dots loading-lg"></span>;
-  }
-
   if (user) {
     return children;
   }
