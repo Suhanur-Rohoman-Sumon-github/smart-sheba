@@ -16,6 +16,7 @@ const CreateNidComponnets = () => {
     content: () => componentRef.current,
   });
   useEffect(() => {
+    console.log("hi");
     window.scrollTo(0, 0);
   }, []);
   const {
@@ -35,7 +36,7 @@ const CreateNidComponnets = () => {
   return (
     <div id="__next">
       <main>
-        <div ref={componentRef}>
+        <div ref={componentRef} style={{ paddingTop: 0 }}>
           <main className="w-full ">
             <div
               className="container w-full py-12 lg:flex lg:items-start"
