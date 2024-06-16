@@ -36,11 +36,15 @@ const CreateNidComponnets = () => {
   return (
     <div className="md:mt-0 mt-40" id="__next">
       <main>
-        <div ref={componentRef} style={{ paddingTop: 0 }}>
+        <div
+          className="md:mt-0 mt-40"
+          ref={componentRef}
+          style={{ paddingTop: 0, paddingBottom: 0 }}
+        >
           <main className="w-full ">
             <div
               className="container w-full py-12 lg:flex lg:items-start"
-              style={{ paddingTop: 0 }}
+              style={{ paddingTop: 0, paddingBottom: 0 }}
             >
               <div className="w-full lg:pl-6">
                 <div className="flex items-center justify-center">
@@ -480,7 +484,7 @@ const CreateNidComponnets = () => {
         </div>
         <button
           onClick={handlePrint}
-          className=" ml-2 bottom-0 w-[680px] flex items-center justify-center md:w-[1280px]  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline no-print"
+          className=" ml-2 md:mt-4 mt-14 bottom-0 w-[680px] flex items-center justify-center md:w-[1280px]  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline no-print"
         >
           print
         </button>
