@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import nid from "../assets/nid- (2)-1.png";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./styels.css";
 import logo from "../assets/map-logo.jpg";
 import flower from "../assets/flower-logo.png";
@@ -15,6 +15,9 @@ const CreateNidComponnets = () => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const {
     nameEnglish,
     nameBangla,
