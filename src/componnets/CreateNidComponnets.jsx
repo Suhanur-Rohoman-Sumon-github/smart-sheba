@@ -41,9 +41,9 @@ const CreateNidComponnets = () => {
           ref={componentRef}
           style={{ paddingTop: 0, paddingBottom: 0 }}
         >
-          <main className="w-full mt-80">
+          <main className="w-full ">
             <div
-              className="container w-full py-12 lg:flex lg:items-start"
+              className="container w-full py-12 lg:flex lg:items-start mt-80 margin"
               style={{ paddingTop: 0, paddingBottom: 0 }}
             >
               <div className="w-full lg:pl-6">
