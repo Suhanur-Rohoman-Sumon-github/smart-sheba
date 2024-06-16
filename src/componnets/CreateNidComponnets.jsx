@@ -37,11 +37,11 @@ const CreateNidComponnets = () => {
     <div className="md:mt-0 mt-40" id="__next">
       <main>
         <div
-          className="md:mt-0 mt-80"
+          className="md:mt-0 "
           ref={componentRef}
           style={{ paddingTop: 0, paddingBottom: 0 }}
         >
-          <main className="w-full ">
+          <main className="w-full mt-80">
             <div
               className="container w-full py-12 lg:flex lg:items-start"
               style={{ paddingTop: 0, paddingBottom: 0 }}
