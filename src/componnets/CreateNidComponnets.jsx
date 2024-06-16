@@ -37,7 +37,7 @@ const CreateNidComponnets = () => {
     <div className="md:mt-0 mt-40" id="__next">
       <main>
         <div
-          className="md:mt-0 mt-40"
+          className="md:mt-0 mt-60"
           ref={componentRef}
           style={{ paddingTop: 0, paddingBottom: 0 }}
         >

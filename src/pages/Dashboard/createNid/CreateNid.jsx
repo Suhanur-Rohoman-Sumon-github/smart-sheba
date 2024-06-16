@@ -179,7 +179,7 @@ const CreateNid = () => {
               />
               <span
                 style={{ fontFamily: "'SolaimanLipi', Arial, sans-serif" }}
-                className=" text-2xl font-bold text-[#0066FF]"
+                className=" text-xl font-bold text-[#0066FF]"
               >
                 সাইন কপি আপলোড করুন
               </span>
