@@ -10,10 +10,11 @@ import { useReactToPrint } from "react-to-print";
 const CreateNidComponnets = () => {
   const componentRef = useRef();
   const location = useLocation();
-  const { data, imageUrl, signature, responses } = location.state || {};
-  console.log(responses);
+  const { data, imageUrl, signature } = location.state || {};
+  const title = data?.idNumber;
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
+    documentTitle: title,
   });
   useEffect(() => {
     console.log("hi");
@@ -43,7 +44,7 @@ const CreateNidComponnets = () => {
         >
           <main className="w-full ">
             <div
-              className="container w-full py-12 lg:flex lg:items-start mt-80 margin"
+              className="container w-full py-12 lg:flex lg:items-start md:mt-0 mt-80 margin"
               style={{ paddingTop: 0, paddingBottom: 0 }}
             >
               <div className="w-full lg:pl-6">
