@@ -34,7 +34,7 @@ const CreateNidComponnets = () => {
   } = data;
 
   return (
-    <div id="__next">
+    <div className="md:mt-0 mt-40" id="__next">
       <main>
         <div ref={componentRef} style={{ paddingTop: 0 }}>
           <main className="w-full ">
