@@ -2998,3 +2998,11 @@ video {
     display: none;
   }
 }
+.center-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+}

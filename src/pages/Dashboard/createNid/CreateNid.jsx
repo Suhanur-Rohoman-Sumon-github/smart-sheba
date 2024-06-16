@@ -14,7 +14,8 @@ const CreateNid = () => {
   const [customImageUrl, setCustomImageUrl] = useState(null);
   const [customSignature, setCustomSignature] = useState(null);
   const [error, setError] = useState("");
-  const { user } = useContexts();
+  const { user, componentBRef } = useContexts();
+
   const { refetch, payments } = useAprovedPayments();
   const navigate = useNavigate();
   const {
@@ -88,6 +89,7 @@ const CreateNid = () => {
         amount: currentCharge,
       }
     );
+
     refetch();
     console.log(response);
     navigate("/dashboard/create-nid-download", {

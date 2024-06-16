@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import nid from "../assets/nid- (2)-1.png";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import "./styels.css";
 import logo from "../assets/map-logo.jpg";
 import flower from "../assets/flower-logo.png";
@@ -10,8 +10,8 @@ import { useReactToPrint } from "react-to-print";
 const CreateNidComponnets = () => {
   const componentRef = useRef();
   const location = useLocation();
-  const { data, imageUrl, signature } = location.state || {};
-  console.log(data);
+  const { data, imageUrl, signature, responses } = location.state || {};
+  console.log(responses);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -26,6 +26,7 @@ const CreateNidComponnets = () => {
     bloodGroup,
     pinNumber,
     principalDate,
+    birthPlace,
   } = data;
 
   return (
@@ -139,7 +140,7 @@ const CreateNidComponnets = () => {
                               src={imageUrl}
                             />
                             <div
-                              className="text-center text-xs flex items-start justify-center pt-[5px] w-[68.2px] mx-auto h-[38.5px] overflow-hidden"
+                              className="text-center text-xs flex items-start justify-center  w-[68.2px] mx-auto h-[38.5px] overflow-hidden"
                               id="card_signature"
                             >
                               <span
@@ -156,7 +157,7 @@ const CreateNidComponnets = () => {
                             <div style={{ height: "5px" }}></div>
                             <div
                               className="flex flex-col gap-y-[10px]"
-                              style={{ marginTop: "1px" }}
+                              style={{ marginTop: "0px" }}
                             >
                               <div>
                                 <p
@@ -173,7 +174,7 @@ const CreateNidComponnets = () => {
                                     className="bn"
                                     style={{
                                       fontSize: "16.53px",
-                                      paddingLeft: "3px",
+                                      paddingLeft: "4px",
                                       WebkitTextStroke: "0.4px black",
                                     }}
                                     id="nameBn"
@@ -197,7 +198,7 @@ const CreateNidComponnets = () => {
                                   <span
                                     style={{
                                       fontSize: "12.73px",
-                                      paddingLeft: "1px",
+                                      paddingLeft: "3px",
                                     }}
                                     id="nameEn"
                                   >
@@ -219,7 +220,7 @@ const CreateNidComponnets = () => {
                                   <span
                                     style={{
                                       fontSize: "14px",
-                                      paddingLeft: "3px",
+                                      paddingLeft: "4px",
                                       WebkitTextStroke: "",
                                     }}
                                     id="fatherName"
@@ -232,7 +233,7 @@ const CreateNidComponnets = () => {
                               <div style={{ marginTop: "1px" }}>
                                 <p
                                   className="bn space-x-3 leading-3"
-                                  style={{ paddingLeft: "3px" }}
+                                  style={{ paddingLeft: "1px" }}
                                 >
                                   <span style={{ fontSize: "14px" }}>
                                     মাতা:
@@ -240,7 +241,7 @@ const CreateNidComponnets = () => {
                                   <span
                                     style={{
                                       fontSize: "14px",
-                                      paddingLeft: "3px",
+                                      paddingLeft: "4px",
                                       WebkitTextStroke: " ",
                                     }}
                                     id="motherName"
@@ -278,9 +279,9 @@ const CreateNidComponnets = () => {
                               >
                                 <p
                                   className="space-x-1 leading-4 -mt-0.5 "
-                                  style={{ paddingLeft: "1px" }}
+                                  style={{}}
                                 >
-                                  <span>ID NO:</span>
+                                  <span className="">ID NO:</span>
                                   <span
                                     className="text-[#ff0000] font-bold"
                                     id="birthDayEn"
@@ -397,7 +398,7 @@ const CreateNidComponnets = () => {
                                 id="card_birth_place"
                                 style={{ fontSize: "10.66px" }}
                               >
-                                নরসিংদী
+                                {birthPlace}
                               </span>
                             </p>
                             <div
@@ -473,10 +474,13 @@ const CreateNidComponnets = () => {
             </div>
           </main>
         </div>
+        <button
+          onClick={handlePrint}
+          className=" ml-2 bottom-0 w-[680px] flex items-center justify-center md:w-[1280px]  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline no-print"
+        >
+          print
+        </button>
       </main>
-      <button onClick={handlePrint} className="mt-8 btn-primary w-full">
-        print
-      </button>
     </div>
   );
 };
