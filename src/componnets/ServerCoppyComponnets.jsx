@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
-
+import "./styels.css";
 import cbimage from "../assets/last bg server copy.jpg";
 import axios from "axios";
 const Nid = () => {
@@ -74,17 +74,17 @@ const Nid = () => {
         />
         <div
           style={{ fontFamily: "'SolaimanLipi', Arial, sans-serif" }}
-          className="absolute left-[27%] top-[6%] text-[16px] text-yellow-400 "
+          className="absolute left-[31.5%] top-[6%] text-[14px] text-yellow-400 "
         >
           National Identity Registration Wing (NIDW)
         </div>
-        <div className="absolute left-[39%] font-bold top-[8.5%] text-pink-500 text-[14px] ">
+        <div className="absolute left-[39%] font-bold top-[8.8%] text-pink-500 text-[14px] ">
           Select Your Search Category
         </div>
-        <div className="absolute font-bold left-[45%] top-[10.8%] text-green-500  text-[12px]">
+        <div className="absolute  left-[45%] top-[10.8%] text-green-500  text-[12px]">
           Search By NID / Voter No.
         </div>
-        <div className="absolute font-bold left-[45%] top-[12%] text-blue-400 text-[12px]">
+        <div className="absolute  left-[45%] top-[12%] text-blue-400 text-[12px]">
           Search By Form No.
         </div>
         <div className="absolute font-bold left-[29%] top-[14.5%] text-red-500 text-[12px] ">
@@ -103,10 +103,10 @@ const Nid = () => {
         <div className="absolute left-[39%] top-[21.9%] font-bold text-[16px]  text-black">
           জাতীয় পরিচিতি তথ্য
         </div>
-        <div className="absolute left-[39%] top-[24.7%] text-[11px]  text-black">
+        <div className="absolute left-[38.7%] top-[25%] text-[11px]  text-black">
           জাতীয় পরিচয় পত্র নম্বর
         </div>
-        <div className="absolute left-[56%] top-[24.7%] text-[13px] text-black">
+        <div className="absolute left-[55%] top-[25%] text-[11px] text-black">
           {nationalId}
         </div>
         <div className="absolute left-[39%] top-[27.6%] text-[11px]  text-black">
@@ -262,13 +262,13 @@ ${permanentAddr.district}, বিভাগ: ${permanentAddr.division}
             }}
           />
         </div>
+        <button
+          onClick={handlePrint}
+          className="absolute bottom-1 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline no-print"
+        >
+          save
+        </button>
       </div>
-      <button
-        onClick={handlePrint}
-        className="absolute bottom-1 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      >
-        save
-      </button>
     </div>
   );
 };

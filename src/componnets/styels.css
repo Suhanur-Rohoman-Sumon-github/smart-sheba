@@ -2993,3 +2993,8 @@ video {
     transform: rotate(1turn);
   }
 }
+@media print {
+  .no-print {
+    display: none;
+  }
+}
