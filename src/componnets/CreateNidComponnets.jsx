@@ -1,5 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useLocation } from "react-router-dom";
-import nid from "../assets/nid- (2)-1.png";
 import { useEffect, useRef } from "react";
 import "./styels.css";
 import logo from "../assets/map-logo.jpg";
@@ -10,16 +10,17 @@ import { useReactToPrint } from "react-to-print";
 const CreateNidComponnets = () => {
   const componentRef = useRef();
   const location = useLocation();
-  const { data, imageUrl, signature } = location.state || {};
+  const { data, imageUrl, signature, principalDates, addresses } =
+    location.state || {};
   const title = data?.idNumber;
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: title,
   });
   useEffect(() => {
-    console.log("hi");
-    window.scrollTo(0, 0);
-  }, []);
+    handlePrint(); // Automatically trigger printing when component mounts
+  }, [handlePrint]);
   const {
     nameEnglish,
     nameBangla,
@@ -32,19 +33,58 @@ const CreateNidComponnets = () => {
     pinNumber,
     principalDate,
     birthPlace,
+    name,
+    nameEn,
+    father,
+    mother,
+    nationalId,
+    dateOfBirth,
   } = data;
 
+  const principalDat = principalDate ? principalDate : principalDates;
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) {
+      return "Invalid Date";
+    }
+
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+
+    return `${day} ${months[monthIndex]} ${year}`;
+  };
+
+  // Example usage
+  const dateOfBirths = dateOfBirth;
+  const formattedDateOfBirth = formatDate(dateOfBirths);
   return (
-    <div className="md:mt-0 mt-40" id="__next">
+    <div className="" id="__next">
       <main>
         <div
-          className="md:mt-0 "
+          className=""
           ref={componentRef}
           style={{ paddingTop: 0, paddingBottom: 0 }}
         >
           <main className="w-full ">
             <div
-              className="container w-full py-12 lg:flex lg:items-start md:mt-0 mt-80 margin"
+              className="container w-full py-12 lg:flex lg:items-start md:mt-0 "
               style={{ paddingTop: 0, paddingBottom: 0 }}
             >
               <div className="w-full lg:pl-6">
@@ -188,7 +228,7 @@ const CreateNidComponnets = () => {
                                     }}
                                     id="nameBn"
                                   >
-                                    {nameBangla}
+                                    {nameBangla ? nameBangla : name}
                                   </span>
                                 </p>
                               </div>
@@ -211,7 +251,7 @@ const CreateNidComponnets = () => {
                                     }}
                                     id="nameEn"
                                   >
-                                    {nameEnglish}
+                                    {nameEnglish ? nameEnglish : nameEn}
                                   </span>
                                 </p>
                               </div>
@@ -234,7 +274,7 @@ const CreateNidComponnets = () => {
                                     }}
                                     id="fatherName"
                                   >
-                                    {fatherName}
+                                    {fatherName ? fatherName : father}
                                   </span>
                                 </p>
                               </div>
@@ -255,7 +295,7 @@ const CreateNidComponnets = () => {
                                     }}
                                     id="motherName"
                                   >
-                                    {motherName}
+                                    {motherName ? motherName : mother}
                                   </span>
                                 </p>
                               </div>
@@ -276,7 +316,9 @@ const CreateNidComponnets = () => {
                                     className="text-[#ff0000]"
                                     id="birthDayEn"
                                   >
-                                    {birthDate}
+                                    {birthDate
+                                      ? birthDate
+                                      : formattedDateOfBirth}
                                   </span>
                                 </p>
                               </div>
@@ -295,7 +337,7 @@ const CreateNidComponnets = () => {
                                     className="text-[#ff0000] font-bold"
                                     id="birthDayEn"
                                   >
-                                    {idNumber}
+                                    {idNumber ? idNumber : nationalId}
                                   </span>
                                 </p>
                               </div>
@@ -351,7 +393,9 @@ const CreateNidComponnets = () => {
                               letterSpacing: "-0.12px",
                             }}
                           >
-                            {address}
+                            {address
+                              ? address
+                              : `বাসা/হোল্ডিং: -, গ্রাম/রাস্তা: ${addresses?.area}, ডাকঘর: ${addresses?.union} - ${addresses?.postcode},${addresses?.upazila},${addresses?.district}`}
                           </div>
                           <div className="col-span-12 mt-auto flex justify-between">
                             <p
@@ -449,7 +493,7 @@ const CreateNidComponnets = () => {
                             >
                               প্রদানের তারিখ:
                               <span className="ml-2.5" id="card_date">
-                                {principalDate}
+                                {principalDat}
                               </span>
                             </span>
                           </div>
@@ -483,12 +527,6 @@ const CreateNidComponnets = () => {
             </div>
           </main>
         </div>
-        <button
-          onClick={handlePrint}
-          className=" ml-2 md:mt-4 mt-14 bottom-0 w-[680px] flex items-center justify-center md:w-[1280px]  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline no-print"
-        >
-          print
-        </button>
       </main>
     </div>
   );

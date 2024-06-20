@@ -14,7 +14,7 @@ const CreateNid = () => {
   const [customImageUrl, setCustomImageUrl] = useState(null);
   const [customSignature, setCustomSignature] = useState(null);
   const [error, setError] = useState("");
-  const { user, componentBRef } = useContexts();
+  const { user } = useContexts();
 
   const { refetch, payments } = useAprovedPayments();
   const navigate = useNavigate();
@@ -92,7 +92,7 @@ const CreateNid = () => {
 
     refetch();
     console.log(response);
-    navigate("/dashboard/create-nid-download", {
+    navigate("/create-nid-download", {
       state: {
         data: data,
         imageUrl: imageUrls,
@@ -405,6 +405,7 @@ const CreateNid = () => {
         </div>
         {/* Other form fields */}
         <Charge title={"আপনার একাউন্ট থেকে 5 টাকা কাটা হবে।"} />
+        <p className="text-red-500">{error}</p>
         <div className="flex items-center justify-center">
           <button
             type="submit"

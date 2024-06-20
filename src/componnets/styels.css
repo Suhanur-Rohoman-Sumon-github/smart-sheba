@@ -2997,9 +2997,6 @@ video {
   .no-print {
     display: none;
   }
-  .margin {
-    margin: 0;
-  }
 }
 
 .center-button-container {

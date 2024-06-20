@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLaouts from "../layouts/DashboardLaouts";
-import App from "../App";
 import CreateNid from "../pages/Dashboard/createNid/CreateNid";
 import SingnCopy from "../pages/Dashboard/signToServerCopy/SingnCopy";
 import NidCard from "../pages/Dashboard/nidCard/NidCard";
@@ -29,6 +28,7 @@ import BioMetric from "../componnets/BioMetric";
 import CreateNidComponnets from "../componnets/CreateNidComponnets";
 import AddPaymentManualy from "../pages/Dashboard/admin/AddPaymentManualy";
 import UpdateBalance from "../pages/Dashboard/admin/UpdateBalance";
+import ServerToNid from "../pages/servertonid/ServerToNid";
 
 const router = createBrowserRouter([
   {
@@ -128,10 +128,7 @@ const router = createBrowserRouter([
         path: "/dashboard/biometrics-details",
         element: <BioMetric />,
       },
-      {
-        path: "/dashboard/create-nid-download",
-        element: <CreateNidComponnets />,
-      },
+
       {
         path: "/dashboard/add-payments",
         element: <AddPaymentManualy />,
@@ -139,6 +136,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/update-charge",
         element: <UpdateBalance />,
+      },
+      {
+        path: "/dashboard/server-to-nid",
+        element: <ServerToNid />,
       },
     ],
   },
@@ -149,6 +150,10 @@ const router = createBrowserRouter([
   {
     path: "/sinup",
     element: <Sinup />,
+  },
+  {
+    path: "/create-nid-download",
+    element: <CreateNidComponnets />,
   },
 ]);
 

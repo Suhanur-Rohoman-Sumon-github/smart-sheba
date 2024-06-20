@@ -34,10 +34,16 @@ export const navDatas = [
     path: "/dashboard/nid-card",
     element: "এনআইডি কার্ড",
   },
+
   {
     icon: <VscServerProcess />,
     path: "/dashboard/server-copy-unofficial",
     element: "সার্ভার কপি ",
+  },
+  {
+    icon: <VscServerProcess />,
+    path: "/dashboard/server-to-nid",
+    element: "সার্ভার কপি to এনআইডি মেক",
   },
   {
     icon: <FaFingerprint />,
