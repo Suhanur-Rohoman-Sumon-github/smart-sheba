@@ -1041,7 +1041,7 @@ video {
   row-gap: 1.25rem;
 }
 .gap-y-\[10px\] {
-  row-gap: 8px;
+  row-gap: 10px;
 }
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -1990,15 +1990,19 @@ video {
 }
 @font-face {
   font-family: Bangla;
-  src: url(../fonts/Bangla.ttf) format("truetype");
+  src: url(Bangla.ttf);
   font-weight: 400;
   font-style: normal;
 }
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"); */
+.container {
+  font-family: Bangla, arial;
+}
 
 .sans {
   font-family: arial, sans-serif !important;
 }
+
 .bn {
   font-family: Bangla, sans-serif !important;
 }
@@ -2992,18 +2996,4 @@ video {
   to {
     transform: rotate(1turn);
   }
-}
-@media print {
-  .no-print {
-    display: none;
-  }
-}
-
-.center-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 20px;
-  width: 100%;
 }
